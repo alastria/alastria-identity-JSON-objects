@@ -2,7 +2,8 @@
 
 const didValidadorFactory = {
     "shouldExist": shouldExist,
-    "shouldStartWithDID": shouldStartWithDID
+    "shouldStartWithDID": shouldStartWithDID,
+    "shouldHaveAlaAsIdentifier": shouldHaveAlaAsIdentifier
 }
 
 function shouldExist(did) {
@@ -10,7 +11,11 @@ function shouldExist(did) {
 }
 
 function shouldStartWithDID(did) {
-    return did.startsWith("did:");
+    return did.split(":")[0] == 'did';
+}
+
+function shouldHaveAlaAsIdentifier(did) {
+    return did.split(":")[1] == 'ala';
 }
 
 module.exports = didValidadorFactory;
