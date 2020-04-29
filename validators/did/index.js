@@ -3,7 +3,8 @@
 const didValidadorFactory = {
     "shouldExist": shouldExist,
     "shouldStartWithDID": shouldStartWithDID,
-    "shouldHaveAlaAsIdentifier": shouldHaveAlaAsIdentifier
+    "shouldHaveAlaAsIdentifier": shouldHaveAlaAsIdentifier,
+    "shouldHaveQuorOrFabrAsNetwork": shouldHaveQuorOrFabrAsNetwork
 }
 
 function shouldExist(did) {
@@ -16,6 +17,11 @@ function shouldStartWithDID(did) {
 
 function shouldHaveAlaAsIdentifier(did) {
     return did.split(":")[1] == 'ala';
+}
+
+function shouldHaveQuorOrFabrAsNetwork(did) {
+    let network = did.split(":")[2];
+    return (network == 'quor' || network == 'fabr');
 }
 
 module.exports = didValidadorFactory;
