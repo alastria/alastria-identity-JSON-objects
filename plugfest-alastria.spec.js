@@ -11,8 +11,14 @@ describe('Plugfest Alastria 2020', () => {
           var keysDIDs = Object.keys(didObject);
           
           keysDIDs.forEach(keyDID => {
-            it('did should exist', function () {
-              expect(validators.did.shouldExist(didObject[keyDID])).to.be.true;
+            describe("Testing: " + didObject[keyDID], () => {
+              it('did should exist', function () {
+                expect(validators.did.shouldExist(didObject[keyDID])).to.be.true;
+              });
+
+              it('did should start with did:', function() {
+                expect(validators.did.shouldStartWithDID(didObject[keyDID])).to.be.true;
+              });
             });
           });
         })
