@@ -4,7 +4,8 @@ const didValidadorFactory = {
     "shouldExist": shouldExist,
     "shouldStartWithDID": shouldStartWithDID,
     "shouldHaveAlaAsIdentifier": shouldHaveAlaAsIdentifier,
-    "shouldHaveQuorOrFabrAsNetwork": shouldHaveQuorOrFabrAsNetwork
+    "shouldHaveQuorOrFabrAsNetwork": shouldHaveQuorOrFabrAsNetwork,
+    "shouldProxyAddressBeHexadecimal": shouldProxyAddressBeHexadecimal
 }
 
 function shouldExist(did) {
@@ -22,6 +23,12 @@ function shouldHaveAlaAsIdentifier(did) {
 function shouldHaveQuorOrFabrAsNetwork(did) {
     let network = did.split(":")[2];
     return (network == 'quor' || network == 'fabr');
+}
+
+function shouldProxyAddressBeHexadecimal(did) {
+    let proxyAddress = did.split(":")[4]
+    let regExToValidateHex = /^(?:0[xX])?[0-9a-fA-F]+$/;
+    return regExToValidateHex.test(proxyAddress); 
 }
 
 module.exports = didValidadorFactory;

@@ -27,6 +27,10 @@ describe('Plugfest Alastria 2020', () => {
               it('did should start "quor" or "fabr" as network', function() {
                 expect(validators.did.shouldHaveQuorOrFabrAsNetwork(didObject[keyDID])).to.be.true;
               });
+
+              it('did should have hex in proxyAddress', function() {
+                expect(validators.did.shouldProxyAddressBeHexadecimal(didObject[keyDID])).to.be.true;
+              });
             });
           });
         })
