@@ -4,6 +4,7 @@
   "description": "Plugfest to verify custom Credentials, Presentations, Presentation Requests, Alastria Tokens, Alastria Sessions, Alastria Identity Creations (AIC) and DID",
   "main": "index.js",
   "scripts": {
+    "test": "mocha plugfest-alastria.spec.js"
   },
   "repository": {
     "type": "git",
