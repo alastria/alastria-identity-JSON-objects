@@ -10,7 +10,9 @@ const credentialValidadorFactory = {
     "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON,
     "shouldKidInsideDecodedHeaderBeAValidDIDForAlastria": shouldKidInsideDecodedHeaderBeAValidDIDForAlastria,
     "shouldPropertyISSInDecodedPayloadBeRequired": shouldPropertyISSInDecodedPayloadBeRequired,
-    "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID
+    "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID,
+    "shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists": shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists,
+    "shouldPropertyIATInDecodedPayloadExist": shouldPropertyIATInDecodedPayloadExist
 }
 
 function shouldExist(credential) {
@@ -59,6 +61,19 @@ function shouldPropertyISSInDecodedPayloadBeRequired(credential) {
 function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return didValidation.isDIDValidForAlastria(decodedCredential.payload.iss);
+}
+
+function shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    if (decodedCredential.payload.sub == null || decodedCredential.payload.sub == '')
+        return true;
+    else
+        return didValidation.isDIDValidForAlastria(decodedCredential.payload.sub);
+}
+
+function shouldPropertyIATInDecodedPayloadExist(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential.payload.iat != null && decodedCredential.payload.iat != "";
 }
 
 module.exports = credentialValidadorFactory;
