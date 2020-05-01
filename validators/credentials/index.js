@@ -1,12 +1,14 @@
 'use strict';
 const jwt = require('jsonwebtoken');
+const didValidation = require('../did');
 
 const credentialValidadorFactory = {
     "shouldExist": shouldExist,
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
     "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
     "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
-    "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON
+    "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON,
+    "shouldKidInsideDecodedHeaderBeAValidDIDForAlastria": shouldKidInsideDecodedHeaderBeAValidDIDForAlastria
 }
 
 function shouldExist(credential) {
@@ -35,6 +37,12 @@ function shouldDecodedPayloadBeAValidJSON(credential) {
 function shouldDecodedSignatureBeAValidJSON(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential != null && decodedCredential.signature != null;
+}
+
+function shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    console.log(decodedCredential.header.kid);
+    return didValidation.isDIDValidForAlastria(decodedCredential.header.kid);
 }
 
 module.exports = credentialValidadorFactory;
