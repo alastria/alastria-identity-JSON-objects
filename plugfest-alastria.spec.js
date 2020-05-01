@@ -42,6 +42,10 @@ describe('Plugfest Alastria 2020', () => {
             it('credential should exist', function () {
               expect(validators.credentials.shouldExist(credentialObject[keyCredential])).to.be.true;
             });
+
+            it('credential should be a valid JWT structure', function () {
+              expect(validators.credentials.shouldHaveAValidJWTStructure(credentialObject[keyCredential])).to.be.true;
+            });
           });
         });
       });
