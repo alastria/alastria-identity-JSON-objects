@@ -14,7 +14,8 @@ const credentialValidadorFactory = {
     "shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists": shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists,
     "shouldPropertyIATInDecodedPayloadExist": shouldPropertyIATInDecodedPayloadExist,
     "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
-    "shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists
+    "shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists,
+    "shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists
 }
 
 function shouldExist(credential) {
@@ -93,6 +94,14 @@ function shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists(credential) {
         return true;
     else
         return isValidEPOCHDate(decodedCredential.payload.exp);
+}
+
+function shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    if (decodedCredential.payload.nbf == null || decodedCredential.payload.nbf == '')
+        return true;
+    else
+        return isValidEPOCHDate(decodedCredential.payload.nbf);
 }
 
 module.exports = credentialValidadorFactory;
