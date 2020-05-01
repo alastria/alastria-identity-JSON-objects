@@ -39,10 +39,14 @@ function shouldDecodedSignatureBeAValidJSON(credential) {
     return decodedCredential != null && decodedCredential.signature != null;
 }
 
+function getDIDFromKidWithoutKeys(kid) {
+    return kid.split("#")[0]
+}
+
 function shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
-    console.log(decodedCredential.header.kid);
-    return didValidation.isDIDValidForAlastria(decodedCredential.header.kid);
+    let didWithoutKeys = getDIDFromKidWithoutKeys(decodedCredential.header.kid);
+    return didValidation.isDIDValidForAlastria(didWithoutKeys);
 }
 
 module.exports = credentialValidadorFactory;
