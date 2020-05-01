@@ -11,7 +11,7 @@ describe('Plugfest Alastria 2020', () => {
           var keysDIDs = Object.keys(didObject);
           
           keysDIDs.forEach(keyDID => {
-            describe("Testing: " + didObject[keyDID], () => {
+            describe("Testing DIDs: " + didObject[keyDID], () => {
               it('did should exist', function () {
                 expect(validators.did.shouldExist(didObject[keyDID])).to.be.true;
               });
@@ -33,7 +33,15 @@ describe('Plugfest Alastria 2020', () => {
               });
             });
           });
-        })
+        });
+
+        vendor.credentials.forEach(credentialObject => {
+          describe("Testing Credentials: " + credentialObject[keyCredential], () => {
+            it('credential should exist', function () {
+              expect(validators.credentials.shouldExist(credentialObject[keyCredential])).to.be.true;
+            });
+          });
+        });
       });
     });
 });
