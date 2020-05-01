@@ -58,6 +58,10 @@ describe('Plugfest Alastria 2020', () => {
             it('Decoded signature should be a valid JSON', function() {
               expect(validators.credentials.shouldDecodedSignatureBeAValidJSON(credentialObject[keyCredential]), "Signature is not a valid JSON once it is decoded").to.be.true;
             });
+
+            it('Kid inside decoded header should be a valid DID for Alastria', function() {
+              expect(validators.credentials.shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credentialObject[keyCredential]), "Kid inside header is not valid for Alastria").to.be.true;
+            });
           });
         });
       });
