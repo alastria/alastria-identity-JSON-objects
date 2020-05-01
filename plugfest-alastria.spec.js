@@ -40,11 +40,11 @@ describe('Plugfest Alastria 2020', () => {
 
           describe("Testing Credentials: " + credentialObject[keyCredential], () => {
             it('credential should exist', function () {
-              expect(validators.credentials.shouldExist(credentialObject[keyCredential])).to.be.true;
+              expect(validators.credentials.shouldExist(credentialObject[keyCredential]), "Credential should exist").to.be.true;
             });
 
             it('credential should be a valid JWT structure', function () {
-              expect(validators.credentials.shouldHaveAValidJWTStructure(credentialObject[keyCredential])).to.be.true;
+              expect(validators.credentials.shouldHaveAValidJWTStructure(credentialObject[keyCredential]), "It should follow the structure string.string.string").to.be.true;
             });
           });
         });
