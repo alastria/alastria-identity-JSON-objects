@@ -38,7 +38,7 @@ describe('Plugfest Alastria 2020', () => {
         vendor.credentials.forEach(credentialObject => {
           var keyCredential = Object.keys(credentialObject);
 
-          describe("Testing Credentials: " + credentialObject[keyCredential], () => {
+          describe("Testing Credential: " + credentialObject[keyCredential], () => {
             it('credential should exist', function () {
               expect(validators.credentials.shouldExist(credentialObject[keyCredential]), "Credential should exist").to.be.true;
             });
@@ -93,8 +93,6 @@ describe('Plugfest Alastria 2020', () => {
               it('Property NBF of the decoded payload should be a valid number representing an epoch date if exists', function() {
                 expect(validators.credentials.shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credentialObject[keyCredential]), "Property 'nbf' inside decoded payload should be a number representing an EPOCH date if exists").to.be.true;
               });
-
-              //VC inside payload validation 
 
               describe("Testing VC Property: ", function() {
                 it('Property VC of the decoded payload is required', function() {
