@@ -94,8 +94,14 @@ describe('Plugfest Alastria 2020', () => {
               expect(validators.credentials.shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credentialObject[keyCredential]), "Property 'nbf' inside decoded payload should be a number representing an EPOCH date if exists").to.be.true;
             });
 
+            //VC inside payload validation 
+
             it('Property VC of the decoded payload is required', function() {
               expect(validators.credentials.shouldPropertyVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'vc' inside decoded payload is required").to.be.true;
+            });
+
+            it('Property @context inside vc of the decoded payload is required', function() {
+              expect(validators.credentials.shouldContextInVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property '@context' inside property vc in decoded payload is required").to.be.true;
             });
           });
         });

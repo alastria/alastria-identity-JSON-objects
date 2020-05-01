@@ -16,7 +16,8 @@ const credentialValidadorFactory = {
     "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
     "shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists,
     "shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists,
-    "shouldPropertyVCInDecodedPayloadExist": shouldPropertyVCInDecodedPayloadExist
+    "shouldPropertyVCInDecodedPayloadExist": shouldPropertyVCInDecodedPayloadExist,
+    "shouldContextInVCInDecodedPayloadExist": shouldContextInVCInDecodedPayloadExist
 }
 
 function shouldExist(credential) {
@@ -108,6 +109,11 @@ function shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credential) {
 function shouldPropertyVCInDecodedPayloadExist(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential.payload.vc != null && decodedCredential.payload.vc != "";
+}
+
+function shouldContextInVCInDecodedPayloadExist(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential.payload.vc["@context"] != null && decodedCredential.payload.vc["@context"] != "";
 }
 
 module.exports = credentialValidadorFactory;
