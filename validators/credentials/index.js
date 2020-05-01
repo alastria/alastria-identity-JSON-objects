@@ -9,7 +9,7 @@ const credentialValidadorFactory = {
     "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
     "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON,
     "shouldKidInsideDecodedHeaderBeAValidDIDForAlastria": shouldKidInsideDecodedHeaderBeAValidDIDForAlastria,
-    "shouldPropertyISSInDecodedPayloadBeRequired": shouldPropertyISSInDecodedPayloadBeRequired,
+    "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist,
     "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID,
     "shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists": shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists,
     "shouldPropertyIATInDecodedPayloadExist": shouldPropertyIATInDecodedPayloadExist
@@ -53,7 +53,7 @@ function shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credential) {
     return didValidation.isDIDValidForAlastria(didWithoutKeys);
 }
 
-function shouldPropertyISSInDecodedPayloadBeRequired(credential) {
+function shouldPropertyISSInDecodedPayloadExist(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential.payload.iss != null && decodedCredential.payload.iss != "";
 }
