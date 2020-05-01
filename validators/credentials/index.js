@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 const credentialValidadorFactory = {
     "shouldExist": shouldExist,
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
-    "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON
+    "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
+    "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON
 }
 
 function shouldExist(credential) {
@@ -23,6 +24,11 @@ function getCredentialDecodedAsJSON(credentialAsBase64) {
 function shouldDecodedHeaderBeAValidJSON(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential != null && decodedCredential.header != null;
+}
+
+function shouldDecodedPayloadBeAValidJSON(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential != null && decodedCredential.payload != null;
 }
 
 module.exports = credentialValidadorFactory;
