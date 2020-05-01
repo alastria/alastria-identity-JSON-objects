@@ -55,53 +55,56 @@ describe('Plugfest Alastria 2020', () => {
               expect(validators.credentials.shouldDecodedPayloadBeAValidJSON(credentialObject[keyCredential]), "Payload is not a valid JSON once it is decoded").to.be.true;
             });
 
-            //Header validation
+            describe("Testing Payload: ", function() {
+              it('Decoded signature should be a valid JSON', function() {
+                expect(validators.credentials.shouldDecodedSignatureBeAValidJSON(credentialObject[keyCredential]), "Signature is not a valid JSON once it is decoded").to.be.true;
+              });
 
-            it('Decoded signature should be a valid JSON', function() {
-              expect(validators.credentials.shouldDecodedSignatureBeAValidJSON(credentialObject[keyCredential]), "Signature is not a valid JSON once it is decoded").to.be.true;
+              it('Kid inside decoded header should be a valid DID for Alastria', function() {
+                expect(validators.credentials.shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credentialObject[keyCredential]), "Kid inside header is not valid for Alastria").to.be.true;
+              });
             });
 
-            it('Kid inside decoded header should be a valid DID for Alastria', function() {
-              expect(validators.credentials.shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credentialObject[keyCredential]), "Kid inside header is not valid for Alastria").to.be.true;
-            });
+            describe("Testing Payload: ", function() {
+              it('Property ISS of the decoded payload is required', function() {
+                expect(validators.credentials.shouldPropertyISSInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'iss' inside decoded payload is required").to.be.true;
+              });
 
-            //Payload validation
-            it('Property ISS of the decoded payload is required', function() {
-              expect(validators.credentials.shouldPropertyISSInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'iss' inside decoded payload is required").to.be.true;
-            });
+              it('Property ISS of the decoded payload should be a valid Alastria DID', function() {
+                expect(validators.credentials.shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(credentialObject[keyCredential]), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
+              });
 
-            it('Property ISS of the decoded payload should be a valid Alastria DID', function() {
-              expect(validators.credentials.shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(credentialObject[keyCredential]), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
-            });
+              it('Property SUB of the decoded payload if exists, should be a valid Alastria DID', function() {
+                expect(validators.credentials.shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists(credentialObject[keyCredential]), "Property 'sub' inside decoded payload should be a valid Alastria DID if exists").to.be.true;
+              });
 
-            it('Property SUB of the decoded payload if exists, should be a valid Alastria DID', function() {
-              expect(validators.credentials.shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists(credentialObject[keyCredential]), "Property 'sub' inside decoded payload should be a valid Alastria DID if exists").to.be.true;
-            });
+              it('Property IAT of the decoded payload is required', function() {
+                expect(validators.credentials.shouldPropertyIATInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'iat' inside decoded payload is required").to.be.true;
+              });
 
-            it('Property IAT of the decoded payload is required', function() {
-              expect(validators.credentials.shouldPropertyIATInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'iat' inside decoded payload is required").to.be.true;
-            });
+              it('Property IAT of the decoded payload should be a valid number representing an epoch date', function() {
+                expect(validators.credentials.shouldPropertyIATInDecodedPayloadBeAValidJSONDate(credentialObject[keyCredential]), "Property 'iat' inside decoded payload should be a number representing an EPOCH date").to.be.true;
+              });
 
-            it('Property IAT of the decoded payload should be a valid number representing an epoch date', function() {
-              expect(validators.credentials.shouldPropertyIATInDecodedPayloadBeAValidJSONDate(credentialObject[keyCredential]), "Property 'iat' inside decoded payload should be a number representing an EPOCH date").to.be.true;
-            });
+              it('Property EXP of the decoded payload should be a valid number representing an epoch date if exists', function() {
+                expect(validators.credentials.shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists(credentialObject[keyCredential]), "Property 'exp' inside decoded payload should be a number representing an EPOCH date if exists").to.be.true;
+              });
 
-            it('Property EXP of the decoded payload should be a valid number representing an epoch date if exists', function() {
-              expect(validators.credentials.shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists(credentialObject[keyCredential]), "Property 'exp' inside decoded payload should be a number representing an EPOCH date if exists").to.be.true;
-            });
+              it('Property NBF of the decoded payload should be a valid number representing an epoch date if exists', function() {
+                expect(validators.credentials.shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credentialObject[keyCredential]), "Property 'nbf' inside decoded payload should be a number representing an EPOCH date if exists").to.be.true;
+              });
 
-            it('Property NBF of the decoded payload should be a valid number representing an epoch date if exists', function() {
-              expect(validators.credentials.shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credentialObject[keyCredential]), "Property 'nbf' inside decoded payload should be a number representing an EPOCH date if exists").to.be.true;
-            });
+              //VC inside payload validation 
 
-            //VC inside payload validation 
+              describe("Testing VC Property: ", function() {
+                it('Property VC of the decoded payload is required', function() {
+                  expect(validators.credentials.shouldPropertyVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'vc' inside decoded payload is required").to.be.true;
+                });
 
-            it('Property VC of the decoded payload is required', function() {
-              expect(validators.credentials.shouldPropertyVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'vc' inside decoded payload is required").to.be.true;
-            });
-
-            it('Property @context inside vc of the decoded payload is required', function() {
-              expect(validators.credentials.shouldContextInVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property '@context' inside property vc in decoded payload is required").to.be.true;
+                it('Property @context inside vc of the decoded payload is required', function() {
+                  expect(validators.credentials.shouldContextInVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property '@context' inside property vc in decoded payload is required").to.be.true;
+                });
+              });
             });
           });
         });
