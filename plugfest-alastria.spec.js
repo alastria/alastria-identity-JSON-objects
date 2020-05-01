@@ -44,7 +44,7 @@ describe('Plugfest Alastria 2020', () => {
             });
 
             it('credential should be a valid JWT structure', function () {
-              expect(validators.credentials.shouldHaveAValidJWTStructure(credentialObject[keyCredential]), "It should follow the structure string.string.string").to.be.true;
+              expect(validators.credentials.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(credentialObject[keyCredential]), "It should follow the structure string.string.string").to.be.true;
             });
           });
         });
