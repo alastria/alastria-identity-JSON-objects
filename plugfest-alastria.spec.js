@@ -36,6 +36,8 @@ describe('Plugfest Alastria 2020', () => {
         });
 
         vendor.credentials.forEach(credentialObject => {
+          var keyCredential = Object.keys(credentialObject);
+
           describe("Testing Credentials: " + credentialObject[keyCredential], () => {
             it('credential should exist', function () {
               expect(validators.credentials.shouldExist(credentialObject[keyCredential])).to.be.true;
