@@ -69,6 +69,10 @@ describe('Plugfest Alastria 2020', () => {
             it('Property ISS of the decoded payload is required', function() {
               expect(validators.credentials.shouldPropertyISSInDecodedPayloadBeRequired(credentialObject[keyCredential]), "Property 'iss' inside decoded payload is required").to.be.true;
             });
+
+            it('Property ISS of the decoded payload should be a valid Alastria DID', function() {
+              expect(validators.credentials.shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(credentialObject[keyCredential]), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
+            });
           });
         });
       });

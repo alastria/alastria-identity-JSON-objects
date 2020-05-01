@@ -9,7 +9,8 @@ const credentialValidadorFactory = {
     "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
     "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON,
     "shouldKidInsideDecodedHeaderBeAValidDIDForAlastria": shouldKidInsideDecodedHeaderBeAValidDIDForAlastria,
-    "shouldPropertyISSInDecodedPayloadBeRequired": shouldPropertyISSInDecodedPayloadBeRequired
+    "shouldPropertyISSInDecodedPayloadBeRequired": shouldPropertyISSInDecodedPayloadBeRequired,
+    "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID
 }
 
 function shouldExist(credential) {
@@ -53,6 +54,11 @@ function shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credential) {
 function shouldPropertyISSInDecodedPayloadBeRequired(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential.payload.iss != null && decodedCredential.payload.iss != "";
+}
+
+function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return didValidation.isDIDValidForAlastria(decodedCredential.payload.iss);
 }
 
 module.exports = credentialValidadorFactory;
