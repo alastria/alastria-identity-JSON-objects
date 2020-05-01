@@ -54,6 +54,10 @@ describe('Plugfest Alastria 2020', () => {
             it('Decoded payload should be a valid JSON', function() {
               expect(validators.credentials.shouldDecodedPayloadBeAValidJSON(credentialObject[keyCredential]), "Payload is not a valid JSON once it is decoded").to.be.true;
             });
+
+            it('Decoded signature should be a valid JSON', function() {
+              expect(validators.credentials.shouldDecodedSignatureBeAValidJSON(credentialObject[keyCredential]), "Signature is not a valid JSON once it is decoded").to.be.true;
+            });
           });
         });
       });

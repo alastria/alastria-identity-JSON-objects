@@ -5,7 +5,8 @@ const credentialValidadorFactory = {
     "shouldExist": shouldExist,
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
     "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
-    "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON
+    "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
+    "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON
 }
 
 function shouldExist(credential) {
@@ -29,6 +30,11 @@ function shouldDecodedHeaderBeAValidJSON(credential) {
 function shouldDecodedPayloadBeAValidJSON(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential != null && decodedCredential.payload != null;
+}
+
+function shouldDecodedSignatureBeAValidJSON(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential != null && decodedCredential.signature != null;
 }
 
 module.exports = credentialValidadorFactory;
