@@ -10,7 +10,7 @@ function shouldExist(credential) {
 }
 
 function shouldHaveAValidJWTStructure(credential) {
-    let JWTStructureRegEx = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/;
+    let JWTStructureRegEx = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_+/=]*$/;
     return JWTStructureRegEx.test(credential); 
 }
 
