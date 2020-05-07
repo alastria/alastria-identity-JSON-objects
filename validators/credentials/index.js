@@ -1,6 +1,7 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 const didValidation = require('../did');
+const urlRegex = require('url-regex');
 
 const credentialValidadorFactory = {
     "shouldExist": shouldExist,
@@ -17,7 +18,10 @@ const credentialValidadorFactory = {
     "shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists,
     "shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists,
     "shouldPropertyVCInDecodedPayloadExist": shouldPropertyVCInDecodedPayloadExist,
-    "shouldContextInVCInDecodedPayloadExist": shouldContextInVCInDecodedPayloadExist
+    "shouldContextInVCInDecodedPayloadExist": shouldContextInVCInDecodedPayloadExist,
+    "shouldContextInVCInDecodedPayloadBeAnArrayWithTwoElements": shouldContextInVCInDecodedPayloadBeAnArrayWithTwoElements,
+    "shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex": shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex,
+    "shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex": shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex
 }
 
 function shouldExist(credential) {
@@ -114,6 +118,24 @@ function shouldPropertyVCInDecodedPayloadExist(credential) {
 function shouldContextInVCInDecodedPayloadExist(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential.payload.vc["@context"] != null && decodedCredential.payload.vc["@context"] != "";
+}
+
+function shouldContextInVCInDecodedPayloadBeAnArrayWithTwoElements(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    let context = decodedCredential.payload.vc["@context"];
+    return (context.length == 2);
+}
+
+function shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    let context = decodedCredential.payload.vc["@context"];
+    return urlRegex({exact: true}).test(context[0]); 
+}
+
+function shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    let context = decodedCredential.payload.vc["@context"];
+    return context[1] == "JWT"
 }
 
 module.exports = credentialValidadorFactory;
