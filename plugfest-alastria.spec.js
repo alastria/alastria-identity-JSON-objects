@@ -114,6 +114,18 @@ describe('Plugfest Alastria 2020', () => {
                 it('Property @context inside vc should have the string JWT in the second item', function() {
                   expect(validators.credentials.shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex(credentialObject[keyCredential]), "Property '@context' should be an array with the string JWT in the second index").to.be.true;
                 });
+
+                it('Property type inside vc is required', function() {
+                  expect(validators.credentials.shouldTypeInVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'type' inside property vc in decoded payload is required").to.be.true;
+                });
+
+                it('Property type inside vc should be an array with two strings', function() {
+                  expect(validators.credentials.shouldTypeInVCInDecodedPayloadBeAnArrayWithTwoStrings(credentialObject[keyCredential]), "Property 'type' inside property vc in decoded payload should be an array with two strings").to.be.true;
+                });
+
+                it('Property type inside vc should be an array with \'VerifiableCredential\' as the first item of the array', function() {
+                  expect(validators.credentials.shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem(credentialObject[keyCredential]), "Property 'type' inside property vc in decoded payload should be an array with 'VerifiableCredential' as the first item").to.be.true;
+                });
               });
             });
           });

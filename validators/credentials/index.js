@@ -21,7 +21,10 @@ const credentialValidadorFactory = {
     "shouldContextInVCInDecodedPayloadExist": shouldContextInVCInDecodedPayloadExist,
     "shouldContextInVCInDecodedPayloadBeAnArrayWithTwoElements": shouldContextInVCInDecodedPayloadBeAnArrayWithTwoElements,
     "shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex": shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex,
-    "shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex": shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex
+    "shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex": shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex,
+    "shouldTypeInVCInDecodedPayloadExist": shouldTypeInVCInDecodedPayloadExist,
+    "shouldTypeInVCInDecodedPayloadBeAnArrayWithTwoStrings": shouldTypeInVCInDecodedPayloadBeAnArrayWithTwoStrings,
+    "shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem": shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem
 }
 
 function shouldExist(credential) {
@@ -136,6 +139,23 @@ function shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIn
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     let context = decodedCredential.payload.vc["@context"];
     return context[1] == "JWT"
+}
+
+function shouldTypeInVCInDecodedPayloadExist(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential.payload.vc["type"] != null && decodedCredential.payload.vc["type"] != "";
+}
+
+function shouldTypeInVCInDecodedPayloadBeAnArrayWithTwoStrings(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential.payload.vc["type"].length == 2 
+        && (typeof decodedCredential.payload.vc["type"][0] == 'string')
+        && (typeof decodedCredential.payload.vc["type"][1] == 'string');
+}
+
+function shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential.payload.vc["type"][0] == 'VerifiableCredential'
 }
 
 module.exports = credentialValidadorFactory;
