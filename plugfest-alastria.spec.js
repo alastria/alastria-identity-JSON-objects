@@ -126,6 +126,22 @@ describe('Plugfest Alastria 2020', () => {
                 it('Property type inside vc should be an array with \'VerifiableCredential\' as the first item of the array', function() {
                   expect(validators.credentials.shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem(credentialObject[keyCredential]), "Property 'type' inside property vc in decoded payload should be an array with 'VerifiableCredential' as the first item").to.be.true;
                 });
+
+                it('Property credentialSubject inside vc is required', function() {
+                  expect(validators.credentials.shouldCredentialSubjectInVCInDecodedPayloadExist(credentialObject[keyCredential]), "Property 'credentialSubject' inside property vc in decoded payload is required").to.be.true;
+                });
+
+                it('Property credentialSubject inside vc is an object which has one property called levelOfAssurance', function() {
+                  expect(validators.credentials.shouldCredentialSubjectInVCInDecodedPayloadHasAPropertyCalledLevelOfAssurance(credentialObject[keyCredential]), "Property 'credentialSubject' inside property vc in decoded payload have a property called 'levelOfAssurance'").to.be.true;
+                });
+
+                it('Property levelOfAssurance, inside credentialSubject, inside vc should be a number between 0 and 3', function() {
+                  expect(validators.credentials.shouldLevelOfAssuranceInVCInDecodedPayloadBeANumberBetweenZeroAndThree(credentialObject[keyCredential]), "Property 'levelOfAssurance' in decoded payload only accepts values between zero and three (0 - 3)").to.be.true;
+                });
+
+                it('Property credentialSubject inside vc is an object with two properties', function() {
+                  expect(validators.credentials.shouldCredentialSubjectInVCInDecodedPayloadHaveTwoProperties(credentialObject[keyCredential]), "Property 'credentialSubject' in decoded payload should have two properties").to.be.true;
+                });
               });
             });
           });

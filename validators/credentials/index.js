@@ -24,7 +24,11 @@ const credentialValidadorFactory = {
     "shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex": shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex,
     "shouldTypeInVCInDecodedPayloadExist": shouldTypeInVCInDecodedPayloadExist,
     "shouldTypeInVCInDecodedPayloadBeAnArrayWithTwoStrings": shouldTypeInVCInDecodedPayloadBeAnArrayWithTwoStrings,
-    "shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem": shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem
+    "shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem": shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem,
+    "shouldCredentialSubjectInVCInDecodedPayloadExist": shouldCredentialSubjectInVCInDecodedPayloadExist,
+    "shouldCredentialSubjectInVCInDecodedPayloadHasAPropertyCalledLevelOfAssurance": shouldCredentialSubjectInVCInDecodedPayloadHasAPropertyCalledLevelOfAssurance,
+    "shouldLevelOfAssuranceInVCInDecodedPayloadBeANumberBetweenZeroAndThree": shouldLevelOfAssuranceInVCInDecodedPayloadBeANumberBetweenZeroAndThree,
+    "shouldCredentialSubjectInVCInDecodedPayloadHaveTwoProperties": shouldCredentialSubjectInVCInDecodedPayloadHaveTwoProperties
 }
 
 function shouldExist(credential) {
@@ -156,6 +160,29 @@ function shouldTypeInVCInDecodedPayloadBeAnArrayWithTwoStrings(credential) {
 function shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem(credential) {
     let decodedCredential = getCredentialDecodedAsJSON(credential);
     return decodedCredential.payload.vc["type"][0] == 'VerifiableCredential'
+}
+
+function shouldCredentialSubjectInVCInDecodedPayloadExist(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return decodedCredential.payload.vc["credentialSubject"] != null && decodedCredential.payload.vc["credentialSubject"] != "";
+}
+
+function shouldCredentialSubjectInVCInDecodedPayloadHasAPropertyCalledLevelOfAssurance(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return 'levelOfAssurance' in decodedCredential.payload.vc["credentialSubject"];
+}
+
+function shouldLevelOfAssuranceInVCInDecodedPayloadBeANumberBetweenZeroAndThree(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    let levelOfAssurance = decodedCredential.payload.vc["credentialSubject"]["levelOfAssurance"];
+    return (typeof levelOfAssurance == 'number')
+        && levelOfAssurance >= 0
+        && levelOfAssurance <= 3;
+}
+
+function shouldCredentialSubjectInVCInDecodedPayloadHaveTwoProperties(credential) {
+    let decodedCredential = getCredentialDecodedAsJSON(credential);
+    return Object.keys(decodedCredential.payload.vc["credentialSubject"]).length == 2
 }
 
 module.exports = credentialValidadorFactory;
