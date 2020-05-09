@@ -160,6 +160,14 @@ describe('Plugfest Alastria 2020', () => {
               it('Token should be a valid JWT structure', function () {
                 expect(validators.tokens.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(token), "It should follow the structure string.string.string").to.be.true;
               });
+
+              it('Decoded header should be a valid JSON', function() {
+                expect(validators.tokens.shouldDecodedHeaderBeAValidJSON(token), "Header is not a valid JSON once it is decoded").to.be.true;
+              });
+  
+              it('Decoded payload should be a valid JSON', function() {
+                expect(validators.tokens.shouldDecodedPayloadBeAValidJSON(token), "Payload is not a valid JSON once it is decoded").to.be.true;
+              });
             });
           });
         });
