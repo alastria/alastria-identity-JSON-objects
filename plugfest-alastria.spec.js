@@ -173,6 +173,10 @@ describe('Plugfest Alastria 2020', () => {
                 it('Decoded payload should have an iss property (issuer)', function() {
                   expect(validators.tokens.shouldPropertyISSInDecodedPayloadExist(token), "Property 'iss' inside decoded payload is required").to.be.true;
                 });
+
+                it('Property ISS of the decoded payload should be a valid Alastria DID', function() {
+                  expect(validators.tokens.shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(token), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
+                });
               });
             });
           });

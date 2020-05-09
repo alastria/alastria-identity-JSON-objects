@@ -1,5 +1,6 @@
 'use strict';
 const jwt = require('jsonwebtoken');
+const didValidation = require('./did/index.js');
 
 const commonValidators = {
     "shouldExist": shouldExist,
@@ -7,7 +8,8 @@ const commonValidators = {
     "getJWTDecodedAsJSON": getJWTDecodedAsJSON,
     "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
     "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
-    "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist
+    "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist,
+    "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID
 }
 
 function shouldExist(object) {
@@ -36,6 +38,11 @@ function shouldDecodedPayloadBeAValidJSON(jwtObject) {
 function shouldPropertyISSInDecodedPayloadExist(jwtObject) {
     let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
     return decodedJWT.payload.iss != null && decodedJWT.payload.iss != "";
+}
+
+function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return didValidation.isDIDValidForAlastria(decodedJWT.payload.iss);
 }
 
 module.exports = commonValidators;

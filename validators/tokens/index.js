@@ -6,7 +6,8 @@ const tokenValidadorFactory = {
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
     "shouldDecodedHeaderBeAValidJSON": commonValidators.shouldDecodedHeaderBeAValidJSON,
     "shouldDecodedPayloadBeAValidJSON": commonValidators.shouldDecodedPayloadBeAValidJSON,
-    "shouldPropertyISSInDecodedPayloadExist": commonValidators.shouldPropertyISSInDecodedPayloadExist
+    "shouldPropertyISSInDecodedPayloadExist": commonValidators.shouldPropertyISSInDecodedPayloadExist,
+    "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": commonValidators.shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID
 }
 
 module.exports = tokenValidadorFactory;
