@@ -10,7 +10,7 @@ const credentialValidadorFactory = {
     "shouldDecodedPayloadBeAValidJSON": commonValidators.shouldDecodedPayloadBeAValidJSON,
     "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON,
     "shouldKidInsideDecodedHeaderBeAValidDIDForAlastria": shouldKidInsideDecodedHeaderBeAValidDIDForAlastria,
-    "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist,
+    "shouldPropertyISSInDecodedPayloadExist": commonValidators.shouldPropertyISSInDecodedPayloadExist,
     "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID,
     "shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists": shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists,
     "shouldPropertyIATInDecodedPayloadExist": shouldPropertyIATInDecodedPayloadExist,
@@ -44,11 +44,6 @@ function shouldKidInsideDecodedHeaderBeAValidDIDForAlastria(credential) {
     let decodedCredential = commonValidators.getJWTDecodedAsJSON(credential);
     let didWithoutKeys = getDIDFromKidWithoutKeys(decodedCredential.header.kid);
     return didValidation.isDIDValidForAlastria(didWithoutKeys);
-}
-
-function shouldPropertyISSInDecodedPayloadExist(credential) {
-    let decodedCredential = commonValidators.getJWTDecodedAsJSON(credential);
-    return decodedCredential.payload.iss != null && decodedCredential.payload.iss != "";
 }
 
 function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(credential) {

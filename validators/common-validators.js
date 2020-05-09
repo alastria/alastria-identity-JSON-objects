@@ -6,7 +6,8 @@ const commonValidators = {
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
     "getJWTDecodedAsJSON": getJWTDecodedAsJSON,
     "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
-    "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON
+    "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
+    "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist
 }
 
 function shouldExist(object) {
@@ -30,6 +31,11 @@ function shouldDecodedHeaderBeAValidJSON(jwtObject) {
 function shouldDecodedPayloadBeAValidJSON(jwtObject) {
     let decodedJWT = getJWTDecodedAsJSON(jwtObject);
     return decodedJWT != null && decodedJWT.payload != null;
+}
+
+function shouldPropertyISSInDecodedPayloadExist(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return decodedJWT.payload.iss != null && decodedJWT.payload.iss != "";
 }
 
 module.exports = commonValidators;

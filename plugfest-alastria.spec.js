@@ -168,6 +168,12 @@ describe('Plugfest Alastria 2020', () => {
               it('Decoded payload should be a valid JSON', function() {
                 expect(validators.tokens.shouldDecodedPayloadBeAValidJSON(token), "Payload is not a valid JSON once it is decoded").to.be.true;
               });
+
+              describe("Testing payload of the token", () => {
+                it('Decoded payload should have an iss property (issuer)', function() {
+                  expect(validators.tokens.shouldPropertyISSInDecodedPayloadExist(token), "Property 'iss' inside decoded payload is required").to.be.true;
+                });
+              });
             });
           });
         });
