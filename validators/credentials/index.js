@@ -4,10 +4,10 @@ const urlRegex = require('url-regex');
 const commonValidators = require('../common-validators')
 
 const credentialValidadorFactory = {
-    "shouldExist": shouldExist,
-    "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
-    "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
-    "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
+    "shouldExist": commonValidators.shouldExist,
+    "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
+    "shouldDecodedHeaderBeAValidJSON": commonValidators.shouldDecodedHeaderBeAValidJSON,
+    "shouldDecodedPayloadBeAValidJSON": commonValidators.shouldDecodedPayloadBeAValidJSON,
     "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON,
     "shouldKidInsideDecodedHeaderBeAValidDIDForAlastria": shouldKidInsideDecodedHeaderBeAValidDIDForAlastria,
     "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist,
@@ -29,22 +29,6 @@ const credentialValidadorFactory = {
     "shouldCredentialSubjectInVCInDecodedPayloadHasAPropertyCalledLevelOfAssurance": shouldCredentialSubjectInVCInDecodedPayloadHasAPropertyCalledLevelOfAssurance,
     "shouldLevelOfAssuranceInVCInDecodedPayloadBeANumberBetweenZeroAndThree": shouldLevelOfAssuranceInVCInDecodedPayloadBeANumberBetweenZeroAndThree,
     "shouldCredentialSubjectInVCInDecodedPayloadHaveTwoProperties": shouldCredentialSubjectInVCInDecodedPayloadHaveTwoProperties
-}
-
-function shouldExist(credential) {
-    return commonValidators.shouldExist(credential);
-}
-
-function shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(credential) {
-    return commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(credential);
-}
-
-function shouldDecodedHeaderBeAValidJSON(credential) {
-    return commonValidators.shouldDecodedHeaderBeAValidJSON(credential);
-}
-
-function shouldDecodedPayloadBeAValidJSON(credential) {
-    return commonValidators.shouldDecodedPayloadBeAValidJSON(credential);
 }
 
 function shouldDecodedSignatureBeAValidJSON(credential) {
