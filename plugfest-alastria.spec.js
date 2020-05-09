@@ -150,10 +150,15 @@ describe('Plugfest Alastria 2020', () => {
         describe("Testing alastria tokens", () => {
           vendor.tokens.forEach(tokenObject => {
             var keyToken = Object.keys(tokenObject);
+            var token = tokenObject[keyToken];
   
-            describe("Testing Token: " + tokenObject[keyToken], () => {
+            describe("Testing Token: " + token, () => {
               it('Token should exist', function () {
-                expect(validators.tokens.shouldExist(tokenObject[keyToken]), "Token should exist").to.be.true;
+                expect(validators.tokens.shouldExist(token), "Token should exist").to.be.true;
+              });
+
+              it('Token should be a valid JWT structure', function () {
+                expect(validators.tokens.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(token), "It should follow the structure string.string.string").to.be.true;
               });
             });
           });
