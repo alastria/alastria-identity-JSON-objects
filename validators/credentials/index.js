@@ -2,6 +2,7 @@
 const jwt = require('jsonwebtoken');
 const didValidation = require('../did');
 const urlRegex = require('url-regex');
+const commonValidators = require('../common-validators')
 
 const credentialValidadorFactory = {
     "shouldExist": shouldExist,
@@ -32,12 +33,11 @@ const credentialValidadorFactory = {
 }
 
 function shouldExist(credential) {
-    return credential != null && credential != undefined;
+    return commonValidators.shouldExist(credential);
 }
 
 function shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(credential) {
-    let JWTStructureRegEx = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_+/=]*$/;
-    return JWTStructureRegEx.test(credential); 
+    return commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(credential);
 }
 
 function getCredentialDecodedAsJSON(credentialAsBase64) {

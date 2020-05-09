@@ -1,4 +1,5 @@
 'use strict';
+const commonValidators = require('../common-validators')
 
 const tokenValidadorFactory = {
     "shouldExist": shouldExist,
@@ -6,12 +7,11 @@ const tokenValidadorFactory = {
 }
 
 function shouldExist(token) {
-    return token != null && token != undefined;
+    return commonValidators.shouldExist(token)
 }
 
 function shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(token) {
-    let ATStructureRegEx = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_+/=]*$/;
-    return ATStructureRegEx.test(token); 
+    return commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(token)
 }
 
 module.exports = tokenValidadorFactory;
