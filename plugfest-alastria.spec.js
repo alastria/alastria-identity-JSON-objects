@@ -146,6 +146,18 @@ describe('Plugfest Alastria 2020', () => {
             });
           });
         });
+
+        describe("Testing alastria tokens", () => {
+          vendor.tokens.forEach(tokenObject => {
+            var keyToken = Object.keys(tokenObject);
+  
+            describe("Testing Token: " + tokenObject[keyToken], () => {
+              it('Token should exist', function () {
+                expect(validators.tokens.shouldExist(tokenObject[keyToken]), "Token should exist").to.be.true;
+              });
+            });
+          });
+        });
       });
     });
 });
