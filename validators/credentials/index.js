@@ -12,8 +12,8 @@ const credentialValidadorFactory = {
     "shouldPropertyISSInDecodedPayloadExist": commonValidators.shouldPropertyISSInDecodedPayloadExist,
     "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID,
     "shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists": shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists,
-    "shouldPropertyIATInDecodedPayloadExist": shouldPropertyIATInDecodedPayloadExist,
-    "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
+    "shouldPropertyIATInDecodedPayloadExist": commonValidators.shouldPropertyIATInDecodedPayloadExist,
+    "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": commonValidators.shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
     "shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists,
     "shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists": shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists,
     "shouldPropertyVCInDecodedPayloadExist": shouldPropertyVCInDecodedPayloadExist,
@@ -58,26 +58,12 @@ function shouldPropertySUBInDecodedPayloadBeAValidAlastriaDIDIfExists(credential
         return didValidation.isDIDValidForAlastria(decodedCredential.payload.sub);
 }
 
-function shouldPropertyIATInDecodedPayloadExist(credential) {
-    let decodedCredential = commonValidators.getJWTDecodedAsJSON(credential);
-    return decodedCredential.payload.iat != null && decodedCredential.payload.iat != "";
-}
-
-function isValidEPOCHDate(value) {
-    return Number.isInteger(value) && ((new Date(value)).getTime() > 0);
-}
-
-function shouldPropertyIATInDecodedPayloadBeAValidJSONDate(credential) {
-    let decodedCredential = commonValidators.getJWTDecodedAsJSON(credential);
-    return isValidEPOCHDate(decodedCredential.payload.iat);
-}
-
 function shouldPropertyEXPInDecodedPayloadBeAValidJSONDateIfExists(credential) {
     let decodedCredential = commonValidators.getJWTDecodedAsJSON(credential);
     if (decodedCredential.payload.exp == null || decodedCredential.payload.exp == '')
         return true;
     else
-        return isValidEPOCHDate(decodedCredential.payload.exp);
+        return commonValidators.isValidEPOCHDate(decodedCredential.payload.exp);
 }
 
 function shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credential) {
@@ -85,7 +71,7 @@ function shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(credential) {
     if (decodedCredential.payload.nbf == null || decodedCredential.payload.nbf == '')
         return true;
     else
-        return isValidEPOCHDate(decodedCredential.payload.nbf);
+        return commonValidators.isValidEPOCHDate(decodedCredential.payload.nbf);
 }
 
 function shouldPropertyVCInDecodedPayloadExist(credential) {

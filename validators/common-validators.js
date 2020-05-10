@@ -9,7 +9,10 @@ const commonValidators = {
     "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
     "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
     "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist,
-    "isValidURL": isValidURL
+    "isValidURL": isValidURL,
+    "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
+    "shouldPropertyIATInDecodedPayloadExist": shouldPropertyIATInDecodedPayloadExist,
+    "isValidEPOCHDate": isValidEPOCHDate
 }
 
 function shouldExist(object) {
@@ -42,6 +45,20 @@ function shouldPropertyISSInDecodedPayloadExist(jwtObject) {
 
 function isValidURL(str) {
     return urlRegex({exact: true}).test(str); 
+}
+
+function isValidEPOCHDate(value) {
+    return Number.isInteger(value) && ((new Date(value)).getTime() > 0);
+}
+
+function shouldPropertyIATInDecodedPayloadBeAValidJSONDate(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return isValidEPOCHDate(decodedJWT.payload.iat);
+}
+
+function shouldPropertyIATInDecodedPayloadExist(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return shouldExist(decodedJWT.payload.iat);
 }
 
 module.exports = commonValidators;

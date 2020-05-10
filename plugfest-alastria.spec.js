@@ -197,6 +197,14 @@ describe('Plugfest Alastria 2020', () => {
                 it('Decoded payload should have an ani property (Alastria Network Id)', function() {
                   expect(validators.tokens.shouldPropertyANIInDecodedPayloadExist(token), "Property 'ani' inside decoded payload is required").to.be.true;
                 });
+
+                it('Decoded payload should have an iat property (Issued at)', function() {
+                  expect(validators.tokens.shouldPropertyIATInDecodedPayloadExist(token), "Property 'iat' inside decoded payload is required").to.be.true;
+                });
+
+                it('Property IAT of the decoded payload should be a valid number representing an epoch date', function() {
+                  expect(validators.tokens.shouldPropertyIATInDecodedPayloadBeAValidJSONDate(token), "Property 'iat' inside decoded payload should be a valid number representing an epoch date").to.be.true;
+                });
               });
             });
           });

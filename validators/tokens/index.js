@@ -13,7 +13,9 @@ const tokenValidadorFactory = {
     "shouldPropertyGWUInDecodedPayloadBeAValidURL": shouldPropertyGWUInDecodedPayloadBeAValidURL,
     "shouldPropertyCBUInDecodedPayloadExist": shouldPropertyCBUInDecodedPayloadExist,
     "shouldPropertyCBUInDecodedPayloadBeAValidURL": shouldPropertyCBUInDecodedPayloadBeAValidURL,
-    "shouldPropertyANIInDecodedPayloadExist": shouldPropertyANIInDecodedPayloadExist
+    "shouldPropertyANIInDecodedPayloadExist": shouldPropertyANIInDecodedPayloadExist,
+    "shouldPropertyIATInDecodedPayloadExist": commonValidators.shouldPropertyIATInDecodedPayloadExist,
+    "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": commonValidators.shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
 }
 
 function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(jwtObject) {
