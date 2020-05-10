@@ -8,12 +8,18 @@ const tokenValidadorFactory = {
     "shouldDecodedHeaderBeAValidJSON": commonValidators.shouldDecodedHeaderBeAValidJSON,
     "shouldDecodedPayloadBeAValidJSON": commonValidators.shouldDecodedPayloadBeAValidJSON,
     "shouldPropertyISSInDecodedPayloadExist": commonValidators.shouldPropertyISSInDecodedPayloadExist,
-    "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID
+    "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID,
+    "shouldPropertyGWUInDecodedPayloadExist": shouldPropertyGWUInDecodedPayloadExist
 }
 
 function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(jwtObject) {
     let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
     return didValidation.isDIDValidForAlastria(decodedJWT.payload.iss);
+}
+
+function shouldPropertyGWUInDecodedPayloadExist(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return commonValidators.shouldExist(decodedJWT.payload.gwu);
 }
 
 module.exports = tokenValidadorFactory;

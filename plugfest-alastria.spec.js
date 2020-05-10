@@ -177,6 +177,10 @@ describe('Plugfest Alastria 2020', () => {
                 it('Property ISS of the decoded payload should be a valid Alastria DID', function() {
                   expect(validators.tokens.shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(token), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
                 });
+
+                it('Decoded payload should have an GWU property (gateway URL)', function() {
+                  expect(validators.tokens.shouldPropertyGWUInDecodedPayloadExist(token), "Property 'gwu' inside decoded payload is required").to.be.true;
+                });
               });
             });
           });
