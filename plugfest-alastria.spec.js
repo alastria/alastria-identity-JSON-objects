@@ -181,6 +181,10 @@ describe('Plugfest Alastria 2020', () => {
                 it('Decoded payload should have an GWU property (gateway URL)', function() {
                   expect(validators.tokens.shouldPropertyGWUInDecodedPayloadExist(token), "Property 'gwu' inside decoded payload is required").to.be.true;
                 });
+
+                it('Property GWU of the decoded payload should be a valid URL', function() {
+                  expect(validators.tokens.shouldPropertyGWUInDecodedPayloadBeAValidURL(token), "Property 'gwu' inside decoded payload should be a valid URL").to.be.true;
+                });
               });
             });
           });

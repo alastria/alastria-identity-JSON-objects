@@ -1,6 +1,5 @@
 'use strict';
 const didValidation = require('../did');
-const urlRegex = require('url-regex');
 const commonValidators = require('../common-validators')
 
 const credentialValidadorFactory = {
@@ -108,7 +107,7 @@ function shouldContextInVCInDecodedPayloadBeAnArrayWithTwoElements(credential) {
 function shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex(credential) {
     let decodedCredential = commonValidators.getJWTDecodedAsJSON(credential);
     let context = decodedCredential.payload.vc["@context"];
-    return urlRegex({exact: true}).test(context[0]); 
+    return commonValidators.isValidURL(context[0]); 
 }
 
 function shouldContextInVCInDecodedPayloadBeAnArrayWithTheStringJWTInTheSecondIndex(credential) {

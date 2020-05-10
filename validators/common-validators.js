@@ -1,5 +1,6 @@
 'use strict';
 const jwt = require('jsonwebtoken');
+const urlRegex = require('url-regex');
 
 const commonValidators = {
     "shouldExist": shouldExist,
@@ -7,7 +8,8 @@ const commonValidators = {
     "getJWTDecodedAsJSON": getJWTDecodedAsJSON,
     "shouldDecodedHeaderBeAValidJSON": shouldDecodedHeaderBeAValidJSON,
     "shouldDecodedPayloadBeAValidJSON": shouldDecodedPayloadBeAValidJSON,
-    "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist
+    "shouldPropertyISSInDecodedPayloadExist": shouldPropertyISSInDecodedPayloadExist,
+    "isValidURL": isValidURL
 }
 
 function shouldExist(object) {
@@ -36,6 +38,10 @@ function shouldDecodedPayloadBeAValidJSON(jwtObject) {
 function shouldPropertyISSInDecodedPayloadExist(jwtObject) {
     let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
     return decodedJWT.payload.iss != null && decodedJWT.payload.iss != "";
+}
+
+function isValidURL(str) {
+    return urlRegex({exact: true}).test(str); 
 }
 
 module.exports = commonValidators;
