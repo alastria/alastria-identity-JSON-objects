@@ -22,7 +22,8 @@
             "additionalProperties": false,
             "properties": {
                 "iss": {
-                    "type": "string"
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
                 },
                 "gwu": {
                     "type": "string"
