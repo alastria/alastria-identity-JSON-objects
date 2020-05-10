@@ -193,6 +193,10 @@ describe('Plugfest Alastria 2020', () => {
                 it('Property CBU of the decoded payload should be a valid URL', function() {
                   expect(validators.tokens.shouldPropertyCBUInDecodedPayloadBeAValidURL(token), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
                 });
+
+                it('Decoded payload should have an ani property (Alastria Network Id)', function() {
+                  expect(validators.tokens.shouldPropertyANIInDecodedPayloadExist(token), "Property 'ani' inside decoded payload is required").to.be.true;
+                });
               });
             });
           });
