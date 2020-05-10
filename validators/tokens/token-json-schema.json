@@ -5,11 +5,48 @@
     "properties": {
         "header": {
             "type": "object",
-            "required": ["typ", "alg"]
+            "required": ["typ", "alg"],
+            "properties": {
+                "typ": {
+                    "type": "string"
+                },
+                "alg": {
+                    "type": "string"
+                }
+            }
         },
         "payload": {
             "type": "object",
-            "required": ["iss", "gwu", "cbu", "ani", "iat", "exp"]
+            "required": ["iss", "gwu", "cbu", "ani", "iat", "exp"],
+            "properties": {
+                "iss": {
+                    "type": "string"
+                },
+                "gwu": {
+                    "type": "string"
+                },
+                "cbu": {
+                    "type": "string"
+                },
+                "ani": {
+                    "type": "string"
+                },
+                "iat": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "exp": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "nbf": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "jti": {
+                    "type": "string"
+                }
+            }
         }
     }
 }
