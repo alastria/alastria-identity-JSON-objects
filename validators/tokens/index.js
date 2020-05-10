@@ -10,7 +10,9 @@ const tokenValidadorFactory = {
     "shouldPropertyISSInDecodedPayloadExist": commonValidators.shouldPropertyISSInDecodedPayloadExist,
     "shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID": shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID,
     "shouldPropertyGWUInDecodedPayloadExist": shouldPropertyGWUInDecodedPayloadExist,
-    "shouldPropertyGWUInDecodedPayloadBeAValidURL": shouldPropertyGWUInDecodedPayloadBeAValidURL
+    "shouldPropertyGWUInDecodedPayloadBeAValidURL": shouldPropertyGWUInDecodedPayloadBeAValidURL,
+    "shouldPropertyCBUInDecodedPayloadExist": shouldPropertyCBUInDecodedPayloadExist,
+    "shouldPropertyCBUInDecodedPayloadBeAValidURL": shouldPropertyCBUInDecodedPayloadBeAValidURL
 }
 
 function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(jwtObject) {
@@ -26,6 +28,16 @@ function shouldPropertyGWUInDecodedPayloadExist(jwtObject) {
 function shouldPropertyGWUInDecodedPayloadBeAValidURL(jwtObject) {
     let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
     return commonValidators.isValidURL(decodedJWT.payload.gwu);
+}
+
+function shouldPropertyCBUInDecodedPayloadExist(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return commonValidators.shouldExist(decodedJWT.payload.cbu);
+}
+
+function shouldPropertyCBUInDecodedPayloadBeAValidURL(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return commonValidators.isValidURL(decodedJWT.payload.cbu);
 }
 
 module.exports = tokenValidadorFactory;

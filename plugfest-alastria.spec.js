@@ -185,6 +185,14 @@ describe('Plugfest Alastria 2020', () => {
                 it('Property GWU of the decoded payload should be a valid URL', function() {
                   expect(validators.tokens.shouldPropertyGWUInDecodedPayloadBeAValidURL(token), "Property 'gwu' inside decoded payload should be a valid URL").to.be.true;
                 });
+
+                it('Decoded payload should have an CBU property (callback URL)', function() {
+                  expect(validators.tokens.shouldPropertyCBUInDecodedPayloadExist(token), "Property 'cbu' inside decoded payload is required").to.be.true;
+                });
+
+                it('Property CBU of the decoded payload should be a valid URL', function() {
+                  expect(validators.tokens.shouldPropertyCBUInDecodedPayloadBeAValidURL(token), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
+                });
               });
             });
           });
