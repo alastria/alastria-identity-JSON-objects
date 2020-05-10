@@ -1,0 +1,5 @@
+{
+    "title": "Alastria Token Schema",
+    "type": "object",
+    "required": ["header", "payload"]
+}
