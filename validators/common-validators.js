@@ -61,4 +61,9 @@ function shouldPropertyIATInDecodedPayloadExist(jwtObject) {
     return shouldExist(decodedJWT.payload.iat);
 }
 
+function shouldPropertyEXPInDecodedPayloadBeAValidJSONDate(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return isValidEPOCHDate(decodedJWT.payload.exp);
+}
+
 module.exports = commonValidators;

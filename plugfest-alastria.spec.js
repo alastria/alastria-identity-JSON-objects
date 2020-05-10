@@ -209,6 +209,10 @@ describe('Plugfest Alastria 2020', () => {
                 it('Decoded payload should have an exp property (expiration date)', function() {
                   expect(validators.tokens.shouldPropertyEXPInDecodedPayloadExist(token), "Property 'exp' inside decoded payload is required").to.be.true;
                 });
+
+                it('Property EXP of the decoded payload should be a valid number representing an epoch date', function() {
+                  expect(validators.tokens.shouldPropertyEXPInDecodedPayloadBeAValidJSONDate(token), "Property 'exp' inside decoded payload should be a valid number representing an epoch date").to.be.true;
+                });
               });
             });
           });

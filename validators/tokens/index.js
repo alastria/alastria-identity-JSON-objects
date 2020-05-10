@@ -16,7 +16,8 @@ const tokenValidadorFactory = {
     "shouldPropertyANIInDecodedPayloadExist": shouldPropertyANIInDecodedPayloadExist,
     "shouldPropertyIATInDecodedPayloadExist": commonValidators.shouldPropertyIATInDecodedPayloadExist,
     "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": commonValidators.shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
-    "shouldPropertyEXPInDecodedPayloadExist": shouldPropertyEXPInDecodedPayloadExist
+    "shouldPropertyEXPInDecodedPayloadExist": shouldPropertyEXPInDecodedPayloadExist,
+    "shouldPropertyEXPInDecodedPayloadBeAValidJSONDate": shouldPropertyEXPInDecodedPayloadBeAValidJSONDate
 }
 
 function shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(jwtObject) {
@@ -52,6 +53,11 @@ function shouldPropertyANIInDecodedPayloadExist(jwtObject) {
 function shouldPropertyEXPInDecodedPayloadExist(jwtObject) {
     let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
     return commonValidators.shouldExist(decodedJWT.payload.exp);
+}
+
+function shouldPropertyEXPInDecodedPayloadBeAValidJSONDate(jwtObject) {
+    let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
+    return commonValidators.isValidEPOCHDate(decodedJWT.payload.exp);
 }
 
 module.exports = tokenValidadorFactory;
