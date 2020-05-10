@@ -6,6 +6,7 @@ In order to test the models of any vendor, follow these steps
 ### Install libraries
 ```sh
 $ npm install
+```
 
 ### Adding a Vendor
 
