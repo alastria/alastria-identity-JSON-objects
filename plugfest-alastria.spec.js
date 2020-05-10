@@ -151,81 +151,6 @@ describe('Plugfest Alastria 2020', () => {
           });
         });
 
-        describe("Testing alastria tokens", () => {
-          vendor.tokens.forEach(tokenObject => {
-            var keyToken = Object.keys(tokenObject);
-            var token = tokenObject[keyToken];
-  
-            describe("Testing Token: " + token, () => {
-              it('Token should exist', function () {
-                expect(validators.tokens.shouldExist(token), "Token should exist").to.be.true;
-              });
-
-              it('Token should be a valid JWT structure', function () {
-                expect(validators.tokens.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(token), "It should follow the structure string.string.string").to.be.true;
-              });
-
-              it('Decoded header should be a valid JSON', function() {
-                expect(validators.tokens.shouldDecodedHeaderBeAValidJSON(token), "Header is not a valid JSON once it is decoded").to.be.true;
-              });
-  
-              it('Decoded payload should be a valid JSON', function() {
-                expect(validators.tokens.shouldDecodedPayloadBeAValidJSON(token), "Payload is not a valid JSON once it is decoded").to.be.true;
-              });
-
-              describe("Testing payload of the token", () => {
-                it('Decoded payload should have an iss property (issuer)', function() {
-                  expect(validators.tokens.shouldPropertyISSInDecodedPayloadExist(token), "Property 'iss' inside decoded payload is required").to.be.true;
-                });
-
-                it('Property ISS of the decoded payload should be a valid Alastria DID', function() {
-                  expect(validators.tokens.shouldPropertyISSInDecodedPayloadBeAValidAlastriaDID(token), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
-                });
-
-                it('Decoded payload should have an GWU property (gateway URL)', function() {
-                  expect(validators.tokens.shouldPropertyGWUInDecodedPayloadExist(token), "Property 'gwu' inside decoded payload is required").to.be.true;
-                });
-
-                it('Property GWU of the decoded payload should be a valid URL', function() {
-                  expect(validators.tokens.shouldPropertyGWUInDecodedPayloadBeAValidURL(token), "Property 'gwu' inside decoded payload should be a valid URL").to.be.true;
-                });
-
-                it('Decoded payload should have an CBU property (callback URL)', function() {
-                  expect(validators.tokens.shouldPropertyCBUInDecodedPayloadExist(token), "Property 'cbu' inside decoded payload is required").to.be.true;
-                });
-
-                it('Property CBU of the decoded payload should be a valid URL', function() {
-                  expect(validators.tokens.shouldPropertyCBUInDecodedPayloadBeAValidURL(token), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
-                });
-
-                it('Decoded payload should have an ani property (Alastria Network Id)', function() {
-                  expect(validators.tokens.shouldPropertyANIInDecodedPayloadExist(token), "Property 'ani' inside decoded payload is required").to.be.true;
-                });
-
-                it('Decoded payload should have an iat property (Issued at)', function() {
-                  expect(validators.tokens.shouldPropertyIATInDecodedPayloadExist(token), "Property 'iat' inside decoded payload is required").to.be.true;
-                });
-
-                it('Property IAT of the decoded payload should be a valid number representing an epoch date', function() {
-                  expect(validators.tokens.shouldPropertyIATInDecodedPayloadBeAValidJSONDate(token), "Property 'iat' inside decoded payload should be a valid number representing an epoch date").to.be.true;
-                });
-
-                it('Decoded payload should have an exp property (expiration date)', function() {
-                  expect(validators.tokens.shouldPropertyEXPInDecodedPayloadExist(token), "Property 'exp' inside decoded payload is required").to.be.true;
-                });
-
-                it('Property EXP of the decoded payload should be a valid number representing an epoch date', function() {
-                  expect(validators.tokens.shouldPropertyEXPInDecodedPayloadBeAValidJSONDate(token), "Property 'exp' inside decoded payload should be a valid number representing an epoch date").to.be.true;
-                });
-
-                it('Property NBF of the decoded payload, if exists, should be a valid number representing an epoch date', function() {
-                  expect(validators.tokens.shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(token), "Property 'nbf' inside decoded payload, if exists, should be a valid number representing an epoch date").to.be.true;
-                });
-              });
-            });
-          });
-        });
-
         describe("Testing alastria tokens with JSON Schemas", () => {
           vendor.tokens.forEach(tokenObject => {
             var keyToken = Object.keys(tokenObject);
@@ -245,6 +170,16 @@ describe('Plugfest Alastria 2020', () => {
               it ('Validate schema of the token ' + decodedToken, () =>  {
                 expect(decodedToken).to.be.jsonSchema(tokenSchema);
               });
+
+              it('Property GWU of the decoded payload should be a valid URL', function() {
+                expect(validators.tokens.shouldPropertyGWUInDecodedPayloadBeAValidURL(decodedToken), "Property 'gwu' inside decoded payload should be a valid URL").to.be.true;
+              });
+
+              it('Property CBU of the decoded payload should be a valid URL', function() {
+                expect(validators.tokens.shouldPropertyCBUInDecodedPayloadBeAValidURL(decodedToken), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
+              });
+
+              
             });
           });
         });
