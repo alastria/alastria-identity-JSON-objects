@@ -1,5 +1,11 @@
 {
     "title": "Alastria Token Schema",
     "type": "object",
-    "required": ["header", "payload"]
+    "required": ["header", "payload"],
+    "properties": {
+        "header": {
+            "type": "object",
+            "required": ["typ", "alg"]
+        }
+    }
 }
