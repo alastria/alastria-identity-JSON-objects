@@ -2,6 +2,10 @@ var describe = require('mocha').describe
 var expect = require('chai').expect;
 const vendors = require('./vendors');
 const validators = require('./validators')
+var chai = require('chai');
+chai.use(require('chai-json-schema'));
+const jwt = require('jsonwebtoken');
+var tokenSchema = require('./validators/tokens/token-json-schema.json')
 
 describe('Plugfest Alastria 2020', () => {
     vendors.forEach(vendor => {
@@ -217,6 +221,29 @@ describe('Plugfest Alastria 2020', () => {
                 it('Property NBF of the decoded payload, if exists, should be a valid number representing an epoch date', function() {
                   expect(validators.tokens.shouldPropertyNBFInDecodedPayloadBeAValidJSONDateIfExists(token), "Property 'nbf' inside decoded payload, if exists, should be a valid number representing an epoch date").to.be.true;
                 });
+              });
+            });
+          });
+        });
+
+        describe("Testing alastria tokens with JSON Schemas", () => {
+          vendor.tokens.forEach(tokenObject => {
+            var keyToken = Object.keys(tokenObject);
+            var tokenAsBase64 = tokenObject[keyToken];
+  
+            describe("Testing Token: " + tokenAsBase64, () => {
+              it('Token should exist', function () {
+                expect(validators.tokens.shouldExist(tokenAsBase64), "Token should exist").to.be.true;
+              });
+
+              it('Token should be a valid JWT structure', function () {
+                expect(validators.tokens.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(tokenAsBase64), "It should follow the structure string.string.string").to.be.true;
+              });
+
+              var decodedToken = jwt.decode(tokenAsBase64, {complete: true});
+
+              it ('Validate schema of the token ' + decodedToken, () =>  {
+                expect(decodedToken).to.be.jsonSchema(tokenSchema);
               });
             });
           });
