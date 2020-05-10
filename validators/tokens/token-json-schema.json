@@ -6,6 +6,10 @@
         "header": {
             "type": "object",
             "required": ["typ", "alg"]
+        },
+        "payload": {
+            "type": "object",
+            "required": ["iss", "gwu", "cbu", "ani", "iat", "exp"]
         }
     }
 }
