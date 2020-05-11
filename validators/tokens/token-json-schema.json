@@ -32,7 +32,8 @@
                     "type": "string"
                 },
                 "ani": {
-                    "type": "string"
+                    "type": "string",
+                    "pattern": "^(redt|redb|redT|redB)$"
                 },
                 "iat": {
                     "type": "integer",
