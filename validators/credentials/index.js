@@ -4,14 +4,8 @@ const commonValidators = require('../common-validators')
 const credentialValidadorFactory = {
     "shouldExist": commonValidators.shouldExist,
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
-    "shouldDecodedSignatureBeAValidJSON": shouldDecodedSignatureBeAValidJSON,
     "shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex": shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex,
     "shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem": shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem
-}
-
-function shouldDecodedSignatureBeAValidJSON(credential) {
-    let decodedCredential = commonValidators.getJWTDecodedAsJSON(credential);
-    return decodedCredential != null && decodedCredential.signature != null;
 }
 
 function shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex(credential) {

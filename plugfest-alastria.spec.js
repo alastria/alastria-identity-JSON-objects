@@ -59,10 +59,6 @@ describe('Plugfest Alastria 2020', () => {
               expect(decodedCredential).to.be.jsonSchema(credentialSchema);
             });
 
-            it('Decoded signature should be a valid JSON', function() {
-              expect(validators.credentials.shouldDecodedSignatureBeAValidJSON(credentialObject[keyCredential]), "Signature is not a valid JSON once it is decoded").to.be.true;
-            });
-
             it('Property @context inside vc should have an URL in the first item', function() {
               expect(validators.credentials.shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex(credentialObject[keyCredential]), "Property '@context' should be an array with an URL in the first index").to.be.true;
             });
