@@ -55,7 +55,7 @@ describe('Plugfest Alastria 2020', () => {
 
             var decodedCredential = jwt.decode(credentialAsBase64, {complete: true});
 
-            it ('Validate schema of the credential ' + decodedCredential, () =>  {
+            it ('Validate schema of the credential against credential-json-schema.json' + decodedCredential, () =>  {
               expect(decodedCredential).to.be.jsonSchema(credentialSchema);
             });
 
@@ -85,7 +85,7 @@ describe('Plugfest Alastria 2020', () => {
 
               var decodedToken = jwt.decode(tokenAsBase64, {complete: true});
 
-              it ('Validate schema of the token ' + decodedToken, () =>  {
+              it ('Validate schema of the token against token-json-schema.json' + decodedToken, () =>  {
                 expect(decodedToken).to.be.jsonSchema(tokenSchema);
               });
 
