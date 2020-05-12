@@ -181,6 +181,15 @@ describe('Plugfest Alastria 2020', () => {
             });
           });
         });
+
+        describe("Testing alastria sessions with JSON Schemas", () => {
+          vendor.sessions.forEach(sessionObject => {
+            var keySession = Object.keys(sessionObject);
+            var sessionAsBase64 = sessionObject[keySession];
+
+            
+          });
+        });
       });
     });
 });
