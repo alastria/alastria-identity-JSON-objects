@@ -1,0 +1,56 @@
+{
+    "title": "Alastria Token Schema",
+    "type": "object",
+    "required": ["header", "payload"],
+    "properties": {
+        "header": {
+            "type": "object",
+            "required": ["typ", "alg"],
+            "properties": {
+                "typ": {
+                    "type": "string"
+                },
+                "alg": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "payload": {
+            "type": "object",
+            "required": ["iss", "gwu", "cbu", "ani", "iat", "exp"],
+            "additionalProperties": false,
+            "properties": {
+                "iss": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
+                },
+                "gwu": {
+                    "type": "string"
+                },
+                "cbu": {
+                    "type": "string"
+                },
+                "ani": {
+                    "type": "string",
+                    "pattern": "^(redt|redb|redT|redB)$"
+                },
+                "iat": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "exp": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "nbf": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "jti": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

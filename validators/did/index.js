@@ -1,16 +1,13 @@
 'use strict';
+const commonValidators = require('../common-validators')
 
 const didValidadorFactory = {
-    "shouldExist": shouldExist,
+    "shouldExist": commonValidators.shouldExist,
     "shouldStartWithDID": shouldStartWithDID,
     "shouldHaveAlaAsIdentifier": shouldHaveAlaAsIdentifier,
     "shouldHaveQuorOrFabrAsNetwork": shouldHaveQuorOrFabrAsNetwork,
     "shouldProxyAddressBeHexadecimal": shouldProxyAddressBeHexadecimal,
     "isDIDValidForAlastria": isDIDValidForAlastria
-}
-
-function shouldExist(did) {
-    return did != null && did != undefined;
 }
 
 function shouldStartWithDID(did) {
@@ -33,7 +30,7 @@ function shouldProxyAddressBeHexadecimal(did) {
 }
 
 function isDIDValidForAlastria(did) {
-    return shouldExist(did) && shouldStartWithDID(did) 
+    return commonValidators.shouldExist(did) && shouldStartWithDID(did) 
     && shouldHaveAlaAsIdentifier(did) && shouldHaveQuorOrFabrAsNetwork(did) && shouldProxyAddressBeHexadecimal(did);
 }
 

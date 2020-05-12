@@ -2,9 +2,11 @@
 
 const dids = require('./dids');
 const credentials = require('./credentials');
+const tokens = require('./tokens')
 
 module.exports = {
   name: 'Alastria',
   dids: [...dids],
-  credentials: [...credentials]
+  credentials: [...credentials],
+  tokens: [...tokens]
 };
