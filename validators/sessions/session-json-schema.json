@@ -18,22 +18,19 @@
         },
         "payload": {
             "type": "object",
-            "required": ["iss", "gwu", "cbu", "ani", "iat", "exp"],
+            "required": ["@context", "iss", "pku", "data", "iat", "exp"],
             "additionalProperties": false,
             "properties": {
+                "@context": {
+                    "type": "string"
+                },
                 "iss": {
                     "type": "string",
                     "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
                 },
-                "gwu": {
-                    "type": "string"
-                },
-                "cbu": {
-                    "type": "string"
-                },
-                "ani": {
+                "pku": {
                     "type": "string",
-                    "pattern": "^(redt|redb|redT|redB)$"
+                    "pattern": "^(?:0[xX])?[0-9a-fA-F]+$"
                 },
                 "iat": {
                     "type": "integer",
@@ -46,6 +43,9 @@
                 "nbf": {
                     "type": "integer",
                     "minimum": 0
+                },
+                "data": {
+                    "type": "string"
                 },
                 "jti": {
                     "type": "string"

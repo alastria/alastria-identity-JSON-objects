@@ -6,6 +6,7 @@ var chai = require('chai');
 chai.use(require('chai-json-schema'));
 const jwt = require('jsonwebtoken');
 var tokenSchema = require('./validators/tokens/token-json-schema.json')
+var sessionSchema = require('./validators/sessions/session-json-schema.json')
 
 describe('Plugfest Alastria 2020', () => {
     vendors.forEach(vendor => {
@@ -187,6 +188,46 @@ describe('Plugfest Alastria 2020', () => {
             var keySession = Object.keys(sessionObject);
             var sessionAsBase64 = sessionObject[keySession];
 
+            describe("Testing Session: " + sessionAsBase64, () => {
+              it('Session should exist', function () {
+                expect(validators.sessions.shouldExist(sessionAsBase64), "Session should exist").to.be.true;
+              });
+
+              it('Session should be a valid JWT structure', function () {
+                expect(validators.sessions.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(sessionAsBase64), "It should follow the structure string.string.string").to.be.true;
+              });
+
+              var decodedSession = jwt.decode(sessionAsBase64, {complete: true});
+
+              it ('Validate schema of the session ' + decodedSession, () =>  {
+                expect(decodedSession).to.be.jsonSchema(sessionSchema);
+              });
+
+              it('Property @CONTEXT of the decoded payload should be a valid URL', function () {
+                expect(validators.sessions.shouldPropertyCONTEXTInDecodedPayloadBeAValidURL(decodedSession), "Property '@context' inside decoded payload should be a valid URL").to.be.true;
+              });
+
+              it('Property ISS of the decoded payload should be a valid Alastria DID', function () {
+                expect(validators.sessions.isISSValidForAlastria(decodedSession), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
+              });
+
+              it('Property DATA of the decoded payload should be a valid JWT structure', function () {
+                expect(validators.sessions.isDATAValidForAlastria(decodedSession), "Property 'data' inside decoded payload should be a valid JWT structure").to.be.true;
+              });
+
+              it('Property IAT of the decoded payload should be a valid Epoch Date', function () {
+                expect(validators.sessions.shouldIATBeValidEPOCHDate(decodedSession), "Property 'iat' inside decoded payload should be a valid Epoch Date").to.be.true;
+              });
+
+              it('Property EXP of the decoded payload should be a valid Epoch Date', function () {
+                expect(validators.sessions.shouldEXPBeValidEPOCHDate(decodedSession), "Property 'exp' inside decoded payload should be a valid Epoch Date").to.be.true;
+              });
+              
+              it('Property NBF of the decoded payload should be a valid Epoch Date', function () {
+                expect(validators.sessions.shouldNBFBeValidEPOCHDate(decodedSession), "Property 'nbf' inside decoded payload should be a valid Epoch Date").to.be.true;
+              });
+
+            });
             
           });
         });
