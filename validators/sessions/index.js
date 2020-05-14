@@ -18,7 +18,7 @@ function isISSValidForAlastria(decodedJWT) {
 }
 
 function shouldPropertyCONTEXTInDecodedPayloadBeAValidURL(decodedJWT){
-    return commonValidators.isValidURL(decodedJWT.payload.context);
+    return commonValidators.isValidURL(decodedJWT.payload["@context"]);
 }
 
 function isDATAValidForAlastria(decodedJWT) {
