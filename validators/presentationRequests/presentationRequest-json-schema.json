@@ -1,0 +1,102 @@
+{
+    "title": "Presentation Request Schema",
+    "type": "object",
+    "required": ["header", "payload"],
+    "properties": {
+        "header": {
+            "type": "object",
+            "required": ["typ", "alg", "kid"],
+            "properties": {
+                "typ": {
+                    "type": "string"
+                },
+                "alg": {
+                    "type": "string"
+                },
+                "kid": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
+                }
+            },
+            "additionalProperties": false
+        },
+        "payload": {
+            "type": "object",
+            "required": ["iss", "iat", "cbu", "pr"],
+            "additionalProperties": false,
+            "properties": {
+                "iss": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
+                },
+                "iat": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "cbu": {
+                    "type": "string"
+                },
+                "pr": {
+                    "type": "object",
+                    "required": ["procUrl", "type", "procHash", "@context", "data"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "procUrl": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "procHash": {
+                            "type": "string"
+                        },
+                        "@context": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "data": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": ["@context", "required", "field_name"],
+                                "additionalProperties": false,
+                                "properties": {
+                                    "@context": {
+                                        "type": "string"
+                                    },
+                                    "required": {
+                                        "type": "boolean"
+                                    },
+                                    "field_name": {
+                                        "type": "string"
+                                    },
+                                    "levelOfAssurance": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 3
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "jti": {
+                    "type": "string"
+                },
+                "exp": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "nbf": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            }
+        }
+    }
+}
