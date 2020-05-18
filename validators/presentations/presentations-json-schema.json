@@ -1,0 +1,56 @@
+{
+    "title": "Alastria Presentation Schema",
+    "type": "object",
+    "required": ["header", "payload"],
+    "properties": {
+        "header": {
+            "type": "object",
+            "required": ["typ", "alg", "kid"],
+            "properties": {
+                "typ": {
+                    "type": "string"
+                },
+                "alg": {
+                    "type": "string"
+                },
+                "kid": {
+                    "type": "string",
+                    "$comment": "By now, we expect that after the DID, there will always be the text '#keys-1'",
+                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+#keys-1$"
+                }
+            },
+            "additionalProperties": true
+        },
+        "payload": {
+            "type": "object",
+            "required": ["jti", "iss", "aud", "iat", "exp", "nbf"],
+            "additionalProperties": true,
+            "properties": {
+                "jti": {
+                    "type": "string"
+                },
+                "iss": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
+                },
+                "aud": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
+                },
+                "iat": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "exp": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "nbf": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+
+            }
+        }
+    }
+}
