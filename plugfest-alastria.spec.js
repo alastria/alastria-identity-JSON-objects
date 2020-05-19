@@ -6,6 +6,7 @@ var chai = require('chai');
 chai.use(require('chai-json-schema'));
 const jwt = require('jsonwebtoken');
 var tokenSchema = require('./validators/tokens/token-json-schema.json')
+var presentationRequestSchema = require('./validators/presentationRequests/presentationRequest-json-schema.json')
 
 describe('Plugfest Alastria 2020', () => {
     vendors.forEach(vendor => {
@@ -177,6 +178,33 @@ describe('Plugfest Alastria 2020', () => {
 
               it('Property CBU of the decoded payload should be a valid URL', function() {
                 expect(validators.tokens.shouldPropertyCBUInDecodedPayloadBeAValidURL(decodedToken), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
+              });
+            });
+          });
+        });
+
+        describe("Testing alastria Presentation Request with JSON Schemas", () => {
+          vendor.presentationRequests.forEach(presentationRequestObject => {
+            var keyPresentationRequest = Object.keys(presentationRequestObject);
+            var presentationRequestAsBase64 = presentationRequestObject[keyPresentationRequest];
+  
+            describe("Testing Presentation Request: " + presentationRequestAsBase64, () => {
+              it('Presentation Request should exist', function () {
+                expect(validators.presentationRequests.shouldExist(presentationRequestAsBase64), "Presentation Request should exist").to.be.true;
+              });
+
+              it('Token should be a valid JWT structure', function () {
+                expect(validators.presentationRequests.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(presentationRequestAsBase64), "It should follow the structure string.string.string").to.be.true;
+              });
+
+              var decodedPresentationRequest = jwt.decode(presentationRequestAsBase64, {complete: true});
+
+              it ('Validate schema of the Presentation Request ' + decodedPresentationRequest, () =>  {
+                expect(decodedPresentationRequest).to.be.jsonSchema(presentationRequestSchema);
+              });
+
+              it('Property CBU of the decoded payload should be a valid URL', function() {
+                expect(validators.presentationRequests.shouldPropertyCBUInDecodedPayloadBeAValidURL(decodedToken), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
               });
             });
           });
