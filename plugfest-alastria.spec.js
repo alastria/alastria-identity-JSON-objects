@@ -34,8 +34,8 @@ describe('Plugfest Alastria 2020', () => {
                             expect(validators.did.shouldHaveQuorOrFabrAsNetwork(didObject[keyDID]), "Did should have 'quor' or 'fabr' as network").to.be.true;
                         });
 
-                        it('did should have hex in proxyAddress', function() {
-                            expect(validators.did.shouldProxyAddressBeHexadecimal(didObject[keyDID]), "Did should have a valid hex value as proxy address").to.be.true;
+                        it('did should have a valid string in proxyAddress', function() {
+                            expect(validators.did.shouldProxyAddressBeValidString(didObject[keyDID]), "Did should have a valid string as proxy address").to.be.true;
                         });
                     });
                 });
