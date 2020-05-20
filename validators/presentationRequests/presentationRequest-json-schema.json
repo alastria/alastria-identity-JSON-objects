@@ -15,7 +15,7 @@
                 },
                 "kid": {
                     "type": "string",
-                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
+                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+#keys-1$"
                 }
             },
             "additionalProperties": false
@@ -27,7 +27,7 @@
             "properties": {
                 "iss": {
                     "type": "string",
-                    "pattern": "^did:ala:(quor|fabr):.+:(?:0[xX])?[0-9a-fA-F]+$"
+                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+$"
                 },
                 "iat": {
                     "type": "integer",
