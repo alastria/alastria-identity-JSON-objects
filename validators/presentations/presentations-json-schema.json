@@ -1,39 +1,41 @@
 {
-    "title": "Alastria Token Schema",
+    "title": "Alastria Presentation Schema",
     "type": "object",
     "required": ["header", "payload"],
     "properties": {
         "header": {
             "type": "object",
-            "required": ["typ", "alg"],
+            "required": ["typ", "alg", "kid"],
             "properties": {
                 "typ": {
                     "type": "string"
                 },
                 "alg": {
                     "type": "string"
+                },
+                "kid": {
+                    "type": "string",
+                    "$comment": "By now, we expect that after the DID, there will always be the text '#keys-1'",
+                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+#keys-1$"
                 }
             },
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "payload": {
             "type": "object",
-            "required": ["iss", "gwu", "cbu", "ani", "iat", "exp"],
-            "additionalProperties": false,
+            "required": ["jti", "iss", "aud", "iat", "exp", "nbf"],
+            "additionalProperties": true,
             "properties": {
+                "jti": {
+                    "type": "string"
+                },
                 "iss": {
                     "type": "string",
                     "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+$"
                 },
-                "gwu": {
-                    "type": "string"
-                },
-                "cbu": {
-                    "type": "string"
-                },
-                "ani": {
+                "aud": {
                     "type": "string",
-                    "pattern": "^(redt|redb|redT|redB)$"
+                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+$"
                 },
                 "iat": {
                     "type": "integer",
@@ -46,10 +48,8 @@
                 "nbf": {
                     "type": "integer",
                     "minimum": 0
-                },
-                "jti": {
-                    "type": "string"
                 }
+
             }
         }
     }
