@@ -13,6 +13,6 @@ module.exports = {
   credentials: [...credentials],
   tokens: [...tokens],
   presentationRequests: [...presentationRequests],
-  sessions: [...sessions]
+  sessions: [...sessions],
   presentations: [...presentations]
 };

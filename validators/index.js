@@ -10,7 +10,7 @@ const validators = {
     "did": didValidators,
     "credentials": credentialsValidators,
     "tokens": tokensValidators,
-    "sessions": sessionsValidators
+    "sessions": sessionsValidators,
     "presentationRequests": presentationRequestsValidators,
     "presentations": presentationsValidators
 }
