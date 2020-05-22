@@ -2,13 +2,15 @@
 
 const dids = require('./dids');
 const credentials = require('./credentials');
-const tokens = require('./tokens');
+const tokens = require('./tokens')
+const presentationRequests = require('./presentationRequests')
 const presentations = require('./presentations');
 
 module.exports = {
-    name: 'Alastria',
-    dids: [...dids],
-    credentials: [...credentials],
-    tokens: [...tokens],
-    presentations: [...presentations]
+  name: 'Alastria',
+  dids: [...dids],
+  credentials: [...credentials],
+  tokens: [...tokens],
+  presentationRequests: [...presentationRequests],
+  presentations: [...presentations]
 };
