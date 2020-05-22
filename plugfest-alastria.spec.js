@@ -127,10 +127,6 @@ describe('Plugfest Alastria 2020', () => {
                 expect(validators.sessions.shouldPropertyCONTEXTInDecodedPayloadBeAValidURL(decodedSession), "Property '@context' inside decoded payload should be a valid URL").to.be.true;
               });
 
-              it('Property ISS of the decoded payload should be a valid Alastria DID', function () {
-                expect(validators.sessions.isISSValidForAlastria(decodedSession), "Property 'iss' inside decoded payload should be a valid Alastria DID").to.be.true;
-              });
-
               it('Property DATA of the decoded payload should be a valid JWT structure', function () {
                 expect(validators.sessions.isDATAValidForAlastria(decodedSession), "Property 'data' inside decoded payload should be a valid JWT structure").to.be.true;
               });
