@@ -1,0 +1,56 @@
+{
+    "title": "Alastria Session Schema",
+    "type": "object",
+    "required": ["header", "payload"],
+    "properties": {
+        "header": {
+            "type": "object",
+            "required": ["typ", "alg"],
+            "properties": {
+                "typ": {
+                    "type": "string"
+                },
+                "alg": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "payload": {
+            "type": "object",
+            "required": ["@context", "iss", "pku", "data", "iat", "exp"],
+            "additionalProperties": false,
+            "properties": {
+                "@context": {
+                    "type": "string"
+                },
+                "iss": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+$"
+                },
+                "pku": {
+                    "type": "string",
+                    "pattern": "^(?:0[xX])?[0-9a-fA-F]+$"
+                },
+                "iat": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "exp": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "nbf": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "data": {
+                    "type": "string"
+                },
+                "jti": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
