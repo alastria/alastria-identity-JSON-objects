@@ -153,11 +153,11 @@ describe('Plugfest Alastria 2020', () => {
               });
 
               it('Property CBU of the decoded payload should be a valid URL', function() {
-                expect(validators.presentationRequests.shouldPropertyCBUInDecodedPayloadBeAValidURL(decodedToken), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
+                expect(validators.presentationRequests.shouldPropertyCBUInDecodedPayloadBeAValidURL(decodedPresentationRequest), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
               });
             });
           });
         });
       });
-    });
+    
 });
