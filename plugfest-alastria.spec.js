@@ -133,18 +133,6 @@ describe('Plugfest Alastria 2020', () => {
                 expect(validators.sessions.isDATAValidForAlastria(decodedSession), "Property 'data' inside decoded payload should be a valid JWT structure").to.be.true;
               });
 
-              it('Property IAT of the decoded payload should be a valid Epoch Date', function () {
-                expect(validators.sessions.shouldIATBeValidEPOCHDate(decodedSession), "Property 'iat' inside decoded payload should be a valid Epoch Date").to.be.true;
-              });
-
-              it('Property EXP of the decoded payload should be a valid Epoch Date', function () {
-                expect(validators.sessions.shouldEXPBeValidEPOCHDate(decodedSession), "Property 'exp' inside decoded payload should be a valid Epoch Date").to.be.true;
-              });
-              
-              it('Property NBF of the decoded payload should be a valid Epoch Date', function () {
-                expect(validators.sessions.shouldNBFBeValidEPOCHDate(decodedSession), "Property 'nbf' inside decoded payload should be a valid Epoch Date").to.be.true;
-              });
-
             });
             
           });
