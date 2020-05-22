@@ -5,6 +5,7 @@ const credentials = require('./credentials');
 const tokens = require('./tokens')
 const presentationRequests = require('./presentationRequests')
 const presentations = require('./presentations');
+const alastriaIdCreations = require('./alastriaIdCreations');
 
 module.exports = {
   name: 'Alastria',
@@ -12,5 +13,6 @@ module.exports = {
   credentials: [...credentials],
   tokens: [...tokens],
   presentationRequests: [...presentationRequests],
-  presentations: [...presentations]
+  presentations: [...presentations],
+  alastriaIdCreations: [...alastriaIdCreations]
 };
