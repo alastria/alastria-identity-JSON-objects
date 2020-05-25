@@ -5,7 +5,7 @@ const didValidadorFactory = {
     "shouldExist": commonValidators.shouldExist,
     "shouldStartWithDID": shouldStartWithDID,
     "shouldHaveAlaAsIdentifier": shouldHaveAlaAsIdentifier,
-    "shouldHaveQuorOrFabrAsNetwork": shouldHaveQuorOrFabrAsNetwork,
+    "shouldHaveQuorOrFabrOrBesuAsNetwork": shouldHaveQuorOrFabrOrBesuAsNetwork,
     "shouldProxyAddressBeValidString": shouldProxyAddressBeValidString,
     "isDIDValidForAlastria": isDIDValidForAlastria
 }
@@ -18,20 +18,20 @@ function shouldHaveAlaAsIdentifier(did) {
     return did.split(":")[1] == 'ala';
 }
 
-function shouldHaveQuorOrFabrAsNetwork(did) {
+function shouldHaveQuorOrFabrOrBesuAsNetwork(did) {
     let network = did.split(":")[2];
-    return (network == 'quor' || network == 'fabr');
+    return (network == 'quor' || network == 'fabr' || network == 'besu');
 }
 
 function shouldProxyAddressBeValidString(did) {
     let proxyAddress = did.split(":")[4]
     let regExToValidateHex = /^[0-9a-zA-Z]+$/;
-    return regExToValidateHex.test(proxyAddress); 
+    return regExToValidateHex.test(proxyAddress);
 }
 
 function isDIDValidForAlastria(did) {
-    return commonValidators.shouldExist(did) && shouldStartWithDID(did) 
-    && shouldHaveAlaAsIdentifier(did) && shouldHaveQuorOrFabrAsNetwork(did) && shouldProxyAddressBeValidString(did);
+    return commonValidators.shouldExist(did) && shouldStartWithDID(did)
+    && shouldHaveAlaAsIdentifier(did) && shouldHaveQuorOrFabrOrBesuAsNetwork(did) && shouldProxyAddressBeValidString(did);
 }
 
 module.exports = didValidadorFactory;
