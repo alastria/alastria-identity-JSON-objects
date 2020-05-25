@@ -29,12 +29,12 @@ describe('Plugfest Alastria 2020', () => {
                             expect(validators.did.shouldStartWithDID(didObject[keyDID]), "Did does not start with characters 'did'").to.be.true;
                         });
 
-                        it('did should start "ala" as identifier', function () {
+                        it('did should have "ala" as identifier', function () {
                             expect(validators.did.shouldHaveAlaAsIdentifier(didObject[keyDID]), "Did should have 'ala' as identifier").to.be.true;
                         });
 
-                        it('did should start "quor" or "fabr" as network', function () {
-                            expect(validators.did.shouldHaveQuorOrFabrAsNetwork(didObject[keyDID]), "Did should have 'quor' or 'fabr' as network").to.be.true;
+                        it('did should have "quor" or "fabr" or "besu" as network', function () {
+                            expect(validators.did.shouldHaveQuorOrFabrOrBesuAsNetwork(didObject[keyDID]), "Did should have 'quor' or 'fabr' or 'besu' as network").to.be.true;
                         });
 
                         it('did should have a valid string in proxyAddress', function () {

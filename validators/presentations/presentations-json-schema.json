@@ -16,7 +16,7 @@
                 "kid": {
                     "type": "string",
                     "$comment": "By now, we expect that after the DID, there will always be the text '#keys-1'",
-                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+#keys-1$"
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#keys-1$"
                 }
             },
             "additionalProperties": true
@@ -31,11 +31,11 @@
                 },
                 "iss": {
                     "type": "string",
-                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+$"
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+$"
                 },
                 "aud": {
                     "type": "string",
-                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+$"
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+$"
                 },
                 "iat": {
                     "type": "integer",

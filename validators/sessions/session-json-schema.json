@@ -26,7 +26,7 @@
                 },
                 "iss": {
                     "type": "string",
-                    "pattern": "^did:ala:(quor|fabr):.+:[0-9a-zA-Z]+$"
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+$"
                 },
                 "pku": {
                     "type": "string",
