@@ -1,0 +1,38 @@
+{
+    "title": "Alastria Session Schema",
+    "type": "object",
+    "required": ["header", "payload"],
+    "properties": {
+        "header": {
+            "type": "object",
+            "required": ["typ", "alg"],
+            "properties": {
+                "typ": {
+                    "type": "string"
+                },
+                "alg": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "payload": {
+            "type": "object",
+            "required": ["createAlastriaTX", "alastriaToken", "publicKey"],
+            "additionalProperties": false,
+            "properties": {
+                "createAlastriaTX": {
+                    "type": "string",
+                    "pattern": "^(?:0[xX])?[0-9a-fA-F]+$"
+                },
+                "alastriaToken": {
+                    "type": "string"
+                },
+                "publicKey": {
+                    "type": "string",
+                    "pattern": "^(?:0[xX])?[0-9a-fA-F]+$"
+                }
+            }
+        }
+    }
+}
