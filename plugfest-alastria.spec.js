@@ -6,7 +6,6 @@ var chai = require('chai');
 chai.use(require('chai-json-schema'));
 const jwt = require('jsonwebtoken');
 var presentationRequestSchema = require('./validators/presentationRequests/presentationRequest-json-schema.json');
-var presentationSchema = require('./validators/presentations/presentations-json-schema.json');
 var alastriaIdCreationSchema = require('./validators/alastriaIdCreations/alastriaIdCreation-json-schema.json');
 var { tests } = require('./tests')
 
@@ -55,29 +54,12 @@ describe('Plugfest Alastria 2020', () => {
             });
 
             describe("Testing alastria presentation with JSON Schemas", () => {
-                vendor.presentations.forEach(tokenObject => {
-                    var keyToken = Object.keys(tokenObject);
-                    var tokenAsBase64 = tokenObject[keyToken];
+                vendor.presentations.forEach(presentationObject => {
+                    var keyPresentation = Object.keys(presentationObject);
+                    var presentationAsBase64 = presentationObject[keyPresentation];
 
-                    describe("Testing Presentation: " + tokenAsBase64, () => {
-                        it('Presentation should exist', function () {
-                            expect(validators.presentations.shouldExist(tokenAsBase64), "Presentation should exist").to.be.true;
-                        });
-
-                        it('Presentation should be a valid JWT structure', function () {
-                            expect(validators.presentations.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(tokenAsBase64), "It should follow the structure string.string.string").to.be.true;
-                        });
-
-                        var decodedToken = jwt.decode(tokenAsBase64, {complete: true});
-
-                        it('Validate schema of the Presentation ' + decodedToken, () => {
-                            expect(decodedToken).to.be.jsonSchema(presentationSchema);
-                        });
-
-                        it('Property procUrl of the decoded payload should be a valid URL', function () {
-                            expect(validators.presentations.shouldPropertyPROCURLInDecodedPayloadBeAValidURL(decodedToken), "Property 'procUrl' inside decoded payload should be a valid URL").to.be.true;
-                        });
-
+                    describe("Testing Presentation: " + presentationAsBase64, () => {
+                        tests.presentations.validatePresentation(presentationAsBase64);
                     });
                 });
             });
