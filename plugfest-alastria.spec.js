@@ -11,38 +11,20 @@ var sessionSchema = require('./validators/sessions/session-json-schema.json')
 var credentialSchema = require('./validators/credentials/credential-json-schema.json');
 var presentationSchema = require('./validators/presentations/presentations-json-schema.json');
 var alastriaIdCreationSchema = require('./validators/alastriaIdCreations/alastriaIdCreation-json-schema.json');
+var { tests } = require('./tests')
 
 describe('Plugfest Alastria 2020', () => {
     vendors.forEach(vendor => {
         describe(vendor.name, () => {
-
             vendor.dids.forEach(didObject => {
                 var keysDIDs = Object.keys(didObject);
-
                 keysDIDs.forEach(keyDID => {
                     describe("Testing DIDs: " + didObject[keyDID], () => {
-                        it('did should exist', function () {
-                            expect(validators.did.shouldExist(didObject[keyDID]), "Did does not exist").to.be.true;
-                        });
-
-                        it('did should start with did:', function () {
-                            expect(validators.did.shouldStartWithDID(didObject[keyDID]), "Did does not start with characters 'did'").to.be.true;
-                        });
-
-                        it('did should have "ala" as identifier', function () {
-                            expect(validators.did.shouldHaveAlaAsIdentifier(didObject[keyDID]), "Did should have 'ala' as identifier").to.be.true;
-                        });
-
-                        it('did should have "quor" or "fabr" or "besu" as network', function () {
-                            expect(validators.did.shouldHaveQuorOrFabrOrBesuAsNetwork(didObject[keyDID]), "Did should have 'quor' or 'fabr' or 'besu' as network").to.be.true;
-                        });
-
-                        it('did should have a valid string in proxyAddress', function () {
-                            expect(validators.did.shouldProxyAddressBeValidString(didObject[keyDID]), "Did should have a valid string as proxy address").to.be.true;
-                        });
+                        tests.dids.validateDID(didObject[keyDID]);
                     });
                 });
             });
+            
 
             vendor.credentials.forEach(credentialObject => {
                 var keyCredential = Object.keys(credentialObject);
