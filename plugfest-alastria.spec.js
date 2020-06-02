@@ -1,10 +1,7 @@
 var describe = require('mocha').describe
-var expect = require('chai').expect;
 const vendors = require('./vendors');
-const validators = require('./validators')
 var chai = require('chai');
 chai.use(require('chai-json-schema'));
-const jwt = require('jsonwebtoken');
 var { tests } = require('./tests')
 
 describe('Plugfest Alastria 2020', () => {
@@ -18,7 +15,6 @@ describe('Plugfest Alastria 2020', () => {
                     });
                 });
             });
-            
 
             vendor.credentials.forEach(credentialObject => {
                 var keyCredential = Object.keys(credentialObject);
@@ -85,7 +81,5 @@ describe('Plugfest Alastria 2020', () => {
                 });
             });
         });
-
     });
-
 });
