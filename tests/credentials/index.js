@@ -23,11 +23,11 @@ function validateCredential(credentialAsBase64) {
     });
 
     it('Property @context inside vc should have an URL in the first item', function () {
-        expect(validators.credentials.shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex(credentialObject[keyCredential]), "Property '@context' should be an array with an URL in the first index").to.be.true;
+        expect(validators.credentials.shouldContextInVCInDecodedPayloadBeAnArrayWithAnURLInTheFirstIndex(credentialAsBase64), "Property '@context' should be an array with an URL in the first index").to.be.true;
     });
 
     it('Property type inside vc should be an array with \'VerifiableCredential\' as the first item of the array', function () {
-        expect(validators.credentials.shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem(credentialObject[keyCredential]), "Property 'type' inside property vc in decoded payload should be an array with 'VerifiableCredential' as the first item").to.be.true;
+        expect(validators.credentials.shouldTypeInVCInDecodedPayloadBeAnArrayWithVerifiableCredentialAsTheFirstItem(credentialAsBase64), "Property 'type' inside property vc in decoded payload should be an array with 'VerifiableCredential' as the first item").to.be.true;
     });
 }
 
