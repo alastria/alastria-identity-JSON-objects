@@ -23,14 +23,14 @@
             "properties": {
                 "createAlastriaTX": {
                     "type": "string",
-                    "pattern": "^(?:0[xX])?[0-9a-fA-F]+$"
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
                 },
                 "alastriaToken": {
                     "type": "string"
                 },
                 "publicKey": {
                     "type": "string",
-                    "pattern": "^(?:0[xX])?[0-9a-fA-F]+$"
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
                 }
             }
         }
