@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 const validators = require('../../validators')
 var chai = require('chai');
 chai.use(require('chai-json-schema'));
-//require('commons');
+require('../commons');
 
 function validateDID(did) {
     it('did should exist', function () {
