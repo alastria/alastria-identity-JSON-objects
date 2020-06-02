@@ -6,7 +6,6 @@ var chai = require('chai');
 chai.use(require('chai-json-schema'));
 const jwt = require('jsonwebtoken');
 var presentationRequestSchema = require('./validators/presentationRequests/presentationRequest-json-schema.json');
-var tokenSchema = require('./validators/tokens/token-json-schema.json');
 var sessionSchema = require('./validators/sessions/session-json-schema.json')
 var presentationSchema = require('./validators/presentations/presentations-json-schema.json');
 var alastriaIdCreationSchema = require('./validators/alastriaIdCreations/alastriaIdCreation-json-schema.json');
@@ -40,27 +39,7 @@ describe('Plugfest Alastria 2020', () => {
                     var tokenAsBase64 = tokenObject[keyToken];
 
                     describe("Testing Token: " + tokenAsBase64, () => {
-                        it('Token should exist', function () {
-                            expect(validators.tokens.shouldExist(tokenAsBase64), "Token should exist").to.be.true;
-                        });
-
-                        it('Token should be a valid JWT structure', function () {
-                            expect(validators.tokens.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(tokenAsBase64), "It should follow the structure string.string.string").to.be.true;
-                        });
-
-                        var decodedToken = jwt.decode(tokenAsBase64, {complete: true});
-
-                        it('Validate schema of the token against token-json-schema.json' + decodedToken, () => {
-                            expect(decodedToken).to.be.jsonSchema(tokenSchema);
-                        });
-
-                        it('Property GWU of the decoded payload should be a valid URL', function () {
-                            expect(validators.tokens.shouldPropertyGWUInDecodedPayloadBeAValidURL(decodedToken), "Property 'gwu' inside decoded payload should be a valid URL").to.be.true;
-                        });
-
-                        it('Property CBU of the decoded payload should be a valid URL', function () {
-                            expect(validators.tokens.shouldPropertyCBUInDecodedPayloadBeAValidURL(decodedToken), "Property 'cbu' inside decoded payload should be a valid URL").to.be.true;
-                        });
+                        tests.tokens.validateToken(tokenAsBase64);
                     });
                 });
             });
