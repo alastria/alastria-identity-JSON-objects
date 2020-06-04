@@ -4,16 +4,25 @@ const commonValidators = require('../common-validators')
 const sessionValidadorFactory = {
     "shouldExist": commonValidators.shouldExist,
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
-    "shouldPropertyCONTEXTInDecodedPayloadBeAValidURL":shouldPropertyCONTEXTInDecodedPayloadBeAValidURL,
-    "isDATAValidForAlastria": isDATAValidForAlastria
+    "isCONTEXTValidForAlastria":isCONTEXTValidForAlastria,
+    "isTYPEValidForAlastria": isTYPEValidForAlastria,
+    "isATValidForAlastria": isATValidForAlastria
 }
 
-function shouldPropertyCONTEXTInDecodedPayloadBeAValidURL(decodedJWT){
-    return commonValidators.isValidURL(decodedJWT.payload["@context"]);
+function isCONTEXTValidForAlastria(decodedJWT){
+    return commonValidators.isValidContext(decodedJWT.payload["@context"]);
 }
 
-function isDATAValidForAlastria(decodedJWT) {
-    return commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(decodedJWT.payload.data);
+function isTYPEValidForAlastria(decodedJWT){
+    return commonValidators.isValidType(decodedJWT.payload["type"]);
+}
+
+function isATValidForAlastria(decodedJWT) {
+    return commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(decodedJWT.payload.alastriaToken);
+}
+
+function isTYPEValidForAlastria(decodedJWT){
+    return decodedJWT.payload.type.includes("AlastriaSession");
 }
 
 module.exports = sessionValidadorFactory;

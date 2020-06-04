@@ -5,32 +5,45 @@
     "properties": {
         "header": {
             "type": "object",
-            "required": ["typ", "alg"],
+            "required": ["typ", "alg", "kid"],
             "properties": {
                 "typ": {
                     "type": "string"
                 },
                 "alg": {
                     "type": "string"
+                },
+                "kid": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#keys-[0-9]+$"
+                },
+                "jwk": {
+                    "type": "string",
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
                 }
             },
             "additionalProperties": false
         },
         "payload": {
             "type": "object",
-            "required": ["@context", "iss", "pku", "data", "iat", "exp"],
+            "required": ["@context", "iss", "type", "alastriaToken", "iat", "exp"],
             "additionalProperties": false,
             "properties": {
                 "@context": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "iss": {
                     "type": "string",
                     "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+$"
                 },
-                "pku": {
-                    "type": "string",
-                    "pattern": "^0[xX][0-9a-fA-F]+$"
+                "type": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "iat": {
                     "type": "integer",
@@ -44,7 +57,7 @@
                     "type": "integer",
                     "minimum": 0
                 },
-                "data": {
+                "alastriaToken": {
                     "type": "string"
                 },
                 "jti": {

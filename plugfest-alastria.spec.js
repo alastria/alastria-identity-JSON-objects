@@ -106,34 +106,40 @@ describe('Plugfest Alastria 2020', () => {
 
             describe("Testing alastria sessions with JSON Schemas", () => {
                 vendor.sessions.forEach(sessionObject => {
-                    var keySession = Object.keys(sessionObject);
-                    var sessionAsBase64 = sessionObject[keySession];
+                    var keySessions = Object.keys(sessionObject);
+                    
+                    keySessions.forEach(keySession => {
+                        var sessionAsBase64 = sessionObject[keySession];
 
-                    describe("Testing Session: " + sessionAsBase64, () => {
-                        it('Session should exist', function () {
-                            expect(validators.sessions.shouldExist(sessionAsBase64), "Session should exist").to.be.true;
+                        describe("Testing Session: " + sessionAsBase64, () => {
+                            it('Session should exist', function () {
+                                expect(validators.sessions.shouldExist(sessionAsBase64), "Session should exist").to.be.true;
+                            });
+
+                            it('Session should be a valid JWT structure', function () {
+                                expect(validators.sessions.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(sessionAsBase64), "It should follow the structure string.string.string").to.be.true;
+                            });
+
+                            var decodedSession = jwt.decode(sessionAsBase64, {complete: true});
+
+                            it('Validate schema of the session ' + decodedSession, () => {
+                                expect(decodedSession).to.be.jsonSchema(sessionSchema);
+                            });
+
+                            it('Property @CONTEXT of the decoded payload should contain "https://alastria.github.io/identity/artifacts/v1"', function () {
+                                expect(validators.sessions.isCONTEXTValidForAlastria(decodedSession), "Property '@context' array inside decoded payload should contain at least one 'https://alastria.github.io/identity/artifacts/v1'").to.be.true;
+                            });
+
+                            it('Property TYPE of the decoded payload should contain "AlastriaSession"', function () {
+                                expect(validators.sessions.isTYPEValidForAlastria(decodedSession), "Property 'type' array inside decoded payload should contain at least one 'AlastriaSession'").to.be.true;
+                            });
+
+                            it('Property ALASTRIATOKEN of the decoded payload should be a valid JWT structure', function () {
+                                expect(validators.sessions.isATValidForAlastria(decodedSession), "Property 'alastriaToken' inside decoded payload should be a valid JWT structure").to.be.true;
+                            });
+
                         });
-
-                        it('Session should be a valid JWT structure', function () {
-                            expect(validators.sessions.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(sessionAsBase64), "It should follow the structure string.string.string").to.be.true;
-                        });
-
-                        var decodedSession = jwt.decode(sessionAsBase64, {complete: true});
-
-                        it('Validate schema of the session ' + decodedSession, () => {
-                            expect(decodedSession).to.be.jsonSchema(sessionSchema);
-                        });
-
-                        it('Property @CONTEXT of the decoded payload should be a valid URL', function () {
-                            expect(validators.sessions.shouldPropertyCONTEXTInDecodedPayloadBeAValidURL(decodedSession), "Property '@context' inside decoded payload should be a valid URL").to.be.true;
-                        });
-
-                        it('Property DATA of the decoded payload should be a valid JWT structure', function () {
-                            expect(validators.sessions.isDATAValidForAlastria(decodedSession), "Property 'data' inside decoded payload should be a valid JWT structure").to.be.true;
-                        });
-
                     });
-
                 });
             });
 
