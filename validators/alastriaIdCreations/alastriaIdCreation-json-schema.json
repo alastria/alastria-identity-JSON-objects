@@ -1,5 +1,5 @@
 {
-    "title": "Alastria Session Schema",
+    "title": "Alastria IdCreation Schema",
     "type": "object",
     "required": ["header", "payload"],
     "properties": {
