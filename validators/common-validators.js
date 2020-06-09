@@ -12,8 +12,7 @@ const commonValidators = {
     "isValidURL": isValidURL,
     "shouldPropertyIATInDecodedPayloadBeAValidJSONDate": shouldPropertyIATInDecodedPayloadBeAValidJSONDate,
     "shouldPropertyIATInDecodedPayloadExist": shouldPropertyIATInDecodedPayloadExist,
-    "isValidEPOCHDate": isValidEPOCHDate,
-    "isValidContext": isValidContext
+    "isValidEPOCHDate": isValidEPOCHDate
 }
 
 function shouldExist(object) {
@@ -60,10 +59,6 @@ function shouldPropertyIATInDecodedPayloadBeAValidJSONDate(jwtObject) {
 function shouldPropertyIATInDecodedPayloadExist(jwtObject) {
     let decodedJWT = commonValidators.getJWTDecodedAsJSON(jwtObject);
     return shouldExist(decodedJWT.payload.iat);
-}
-
-function isValidContext(contextArray){
-    return contextArray.includes("https://alastria.github.io/identity/artifacts/v1");
 }
 
 
