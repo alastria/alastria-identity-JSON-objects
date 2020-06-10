@@ -4,16 +4,11 @@ const commonValidators = require('../common-validators')
 const sessionValidadorFactory = {
     "shouldExist": commonValidators.shouldExist,
     "shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots": commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots,
-    "shouldPropertyCONTEXTInDecodedPayloadBeAValidURL":shouldPropertyCONTEXTInDecodedPayloadBeAValidURL,
-    "isDATAValidForAlastria": isDATAValidForAlastria
+    "isATValidForAlastria": isATValidForAlastria
 }
 
-function shouldPropertyCONTEXTInDecodedPayloadBeAValidURL(decodedJWT){
-    return commonValidators.isValidURL(decodedJWT.payload["@context"]);
-}
-
-function isDATAValidForAlastria(decodedJWT) {
-    return commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(decodedJWT.payload.data);
+function isATValidForAlastria(decodedJWT) {
+    return commonValidators.shouldHaveAValidJWTStructureWithThreeSegmentsSeparatedByDots(decodedJWT.payload.alastriaToken);
 }
 
 module.exports = sessionValidadorFactory;

@@ -38,11 +38,14 @@ describe('Plugfest Alastria 2020', () => {
 
             describe("Testing alastria sessions with JSON Schemas", () => {
                 vendor.sessions.forEach(sessionObject => {
-                    var keySession = Object.keys(sessionObject);
-                    var sessionAsBase64 = sessionObject[keySession];
+                    var keySessions = Object.keys(sessionObject);
+                    
+                    keySessions.forEach(keySession => {
+                        var sessionAsBase64 = sessionObject[keySession];
 
-                    describe("Testing Session: " + sessionAsBase64, () => {
-                        tests.sessions.validateSession(sessionAsBase64);
+                        describe("Testing Session: " + sessionAsBase64, () => {
+                            tests.sessions.validateSession(sessionAsBase64);
+                        });
                     });
                 });
             });

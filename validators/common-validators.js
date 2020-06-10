@@ -61,4 +61,5 @@ function shouldPropertyIATInDecodedPayloadExist(jwtObject) {
     return shouldExist(decodedJWT.payload.iat);
 }
 
+
 module.exports = commonValidators;

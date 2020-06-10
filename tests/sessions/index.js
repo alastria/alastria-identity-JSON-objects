@@ -22,12 +22,8 @@ function validateSession(sessionAsBase64) {
         expect(decodedSession).to.be.jsonSchema(sessionSchema);
     });
 
-    it('Property @CONTEXT of the decoded payload should be a valid URL', function () {
-        expect(validators.sessions.shouldPropertyCONTEXTInDecodedPayloadBeAValidURL(decodedSession), "Property '@context' inside decoded payload should be a valid URL").to.be.true;
-    });
-
-    it('Property DATA of the decoded payload should be a valid JWT structure', function () {
-        expect(validators.sessions.isDATAValidForAlastria(decodedSession), "Property 'data' inside decoded payload should be a valid JWT structure").to.be.true;
+    it('Property ALASTRIATOKEN of the decoded payload should be a valid JWT structure', function () {
+        expect(validators.sessions.isATValidForAlastria(decodedSession), "Property 'alastriaToken' inside decoded payload should be a valid JWT structure").to.be.true;
     });
 }
 
