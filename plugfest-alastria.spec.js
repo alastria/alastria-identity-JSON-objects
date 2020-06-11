@@ -75,12 +75,27 @@ describe('Plugfest Alastria 2020', () => {
         });
 
         describe("Testing Alastria ID Creation with JSON Schemas", () => {
-            vendor.alastriaIdCreations.forEach(alastriaIdCreationObject => {
-                var keyAlastriaIdCreation = Object.keys(alastriaIdCreationObject);
-                var alastriaIdCreationAsBase64 = alastriaIdCreationObject[keyAlastriaIdCreation];
+            vendor.sessions.forEach(sessionObject => {
+                var keySessions = Object.keys(sessionObject);
+                
+                keySessions.forEach(keySession => {
+                    var sessionAsBase64 = sessionObject[keySession];
 
-                describe("Testing Alastria ID Creation: " + alastriaIdCreationAsBase64, () => {
-                    tests.alastriaIdCreations.validateAlastriaIdCreation(alastriaIdCreationAsBase64);
+                    describe("Testing Session: " + sessionAsBase64, () => {
+                        tests.sessions.validateSession(sessionAsBase64);
+                    });
+                });
+            });
+
+            vendor.alastriaIdCreations.forEach(alastriaIdCreationObject => {
+                var keyAlastriaIdCreations = Object.keys(alastriaIdCreationObject);
+
+                keyAlastriaIdCreations.forEach(keyAlastriaIdCreation => {
+                    var aicAsBase64 = alastriaIdCreationObject[keyAlastriaIdCreation];
+
+                    describe("Testing Alastria ID Creation: " + aicAsBase64, () => {
+                        tests.alastriaIdCreations.validateAlastriaIdCreation(aicAsBase64);
+                    });
                 });
             });
         });
