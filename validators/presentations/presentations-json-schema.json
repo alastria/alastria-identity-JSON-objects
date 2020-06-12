@@ -15,15 +15,18 @@
                 },
                 "kid": {
                     "type": "string",
-                    "$comment": "By now, we expect that after the DID, there will always be the text '#keys-1'",
-                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#keys-1$"
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#[0-9a-zA-Z-]+$"
+                },
+                "jwk": {
+                    "type": "string",
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
                 }
             },
             "additionalProperties": true
         },
         "payload": {
             "type": "object",
-            "required": ["jti", "iss", "aud", "iat", "exp", "nbf"],
+            "required": ["jti", "iss", "aud", "iat", "exp", "nbf", "vp"],
             "additionalProperties": true,
             "properties": {
                 "jti": {
@@ -48,8 +51,40 @@
                 "nbf": {
                     "type": "integer",
                     "minimum": 0
+                },
+                "vp": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "required": ["@context", "type"],
+                    "properties": {
+                        "@context": {
+                            "type": "array",
+                            "items": [{
+                                "type": "string",
+                                "enum": ["https://www.w3.org/2018/credentials/v1", "https://alastria.github.io/identity/credentials/v1"]
+                            }, {
+                                "type": "string",
+                                "enum": ["https://www.w3.org/2018/credentials/v1", "https://alastria.github.io/identity/credentials/v1"]
+                            }],
+                            "additionalItems": true,
+                            "uniqueItems": true,
+                            "minItems": 2
+                        },
+                        "type": {
+                            "type": "array",
+                            "items": [{
+                                "type": "string",
+                                "enum": ["VerifiablePresentation", "AlastriaVerifiablePresentation"]
+                            }, {
+                                "type": "string",
+                                "enum": ["VerifiablePresentation", "AlastriaVerifiablePresentation"]
+                            }],
+                            "additionalItems": true,
+                            "uniqueItems": true,
+                            "minItems": 2
+                        }
+                    }
                 }
-
             }
         }
     }
