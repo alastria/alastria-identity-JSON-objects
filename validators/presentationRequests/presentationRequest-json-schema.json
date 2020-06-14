@@ -50,18 +50,32 @@
                         },
                         "type": {
                             "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
+                            "items": [{
+                                "type": "string",
+                                "enum": ["VerifiablePresentationRequest", "AlastriaVerifiablePresentationRequest"]
+                            }, {
+                                "type": "string",
+                                "enum": ["VerifiablePresentationRequest", "AlastriaVerifiablePresentationRequest"]
+                            }],
+                            "additionalItems": true,
+                            "uniqueItems": true,
+                            "minItems": 2
                         },
                         "procHash": {
                             "type": "string"
                         },
                         "@context": {
                             "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
+                            "items": [{
+                                "type": "string",
+                                "enum": ["https://www.w3.org/2018/credentials/v1", "https://alastria.github.io/identity/credentials/v1"]
+                            }, {
+                                "type": "string",
+                                "enum": ["https://www.w3.org/2018/credentials/v1", "https://alastria.github.io/identity/credentials/v1"]
+                            }],
+                            "additionalItems": true,
+                            "uniqueItems": true,
+                            "minItems": 2
                         },
                         "data": {
                             "type": "array",
