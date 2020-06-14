@@ -16,6 +16,10 @@
                 "kid": {
                     "type": "string",
                     "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#keys-1$"
+                },
+                "jwk": {
+                    "type": "string",
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
                 }
             },
             "additionalProperties": false
