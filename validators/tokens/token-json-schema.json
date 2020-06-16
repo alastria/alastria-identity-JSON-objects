@@ -5,13 +5,21 @@
     "properties": {
         "header": {
             "type": "object",
-            "required": ["typ", "alg"],
+            "required": ["typ", "alg", "kid"],
             "properties": {
                 "typ": {
                     "type": "string"
                 },
                 "alg": {
                     "type": "string"
+                },
+                "kid": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#[0-9a-zA-Z-]+$"
+                },
+                "jwk": {
+                    "type": "string",
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
                 }
             },
             "additionalProperties": false
