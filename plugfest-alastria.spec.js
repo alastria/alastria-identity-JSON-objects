@@ -75,18 +75,6 @@ describe('Plugfest Alastria 2020', () => {
         });
 
         describe("Testing Alastria ID Creation with JSON Schemas", () => {
-            vendor.sessions.forEach(sessionObject => {
-                var keySessions = Object.keys(sessionObject);
-                
-                keySessions.forEach(keySession => {
-                    var sessionAsBase64 = sessionObject[keySession];
-
-                    describe("Testing Session: " + sessionAsBase64, () => {
-                        tests.sessions.validateSession(sessionAsBase64);
-                    });
-                });
-            });
-
             vendor.alastriaIdCreations.forEach(alastriaIdCreationObject => {
                 var keyAlastriaIdCreations = Object.keys(alastriaIdCreationObject);
 
