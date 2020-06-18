@@ -1,0 +1,81 @@
+{
+    "title": "Alastria IdCreation Schema",
+    "type": "object",
+    "required": ["header", "payload"],
+    "properties": {
+        "header": {
+            "type": "object",
+            "required": ["typ", "alg", "kid"],
+            "properties": {
+                "typ": {
+                    "type": "string"
+                },
+                "alg": {
+                    "type": "string"
+                },
+                "kid": {
+                    "type": "string",
+                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#[0-9a-zA-Z-]+$"
+                },
+                "jwk": {
+                    "type": "string",
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
+                }
+            },
+            "additionalProperties": false
+        },
+        "payload": {
+            "type": "object",
+            "required": ["@context", "type", "createAlastriaTX", "alastriaToken", "publicKey"],
+            "additionalProperties": false,
+            "properties": {
+                "@context": {
+                    "type": "array",
+                    "items": [{
+                        "type": "string",
+                        "enum": ["https://alastria.github.io/identity/artifacts/v1"]
+                    }],
+                    "additionalItems": true,
+                    "uniqueItems": true,
+                    "minItems": 1
+                }, 
+                "type": {
+                    "type": "array",
+                    "items": [{
+                        "type": "string",
+                        "enum": ["AlastriaIdentityCreation"]
+                    }],
+                    "additionalItems": true,
+                    "uniqueItems": true,
+                    "minItems": 1
+                },
+                "createAlastriaTX": {
+                    "type": "string",
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
+                },
+                "alastriaToken": {
+                    "type": "string"
+                },
+                "publicKey": {
+                    "type": "string",
+                    "pattern": "^0[xX][0-9a-fA-F]+$"
+                },
+                "jti": {
+                    "type": "string"
+                },
+                "iat": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "exp": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "nbf": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            }
+        }
+    }
+}

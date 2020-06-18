@@ -3,6 +3,11 @@ Alastria ID Model specification JSON objects verification
 
 In order to test the models of any vendor, follow these steps
 
+### Install libraries
+```sh
+$ npm install
+```
+
 ### Adding a Vendor
 
 1. Add a folder with the keyname of the vendor inside the [vendors](./vendors) folder.
