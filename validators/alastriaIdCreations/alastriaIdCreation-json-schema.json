@@ -5,7 +5,7 @@
     "properties": {
         "header": {
             "type": "object",
-            "required": ["typ", "alg", "kid"],
+            "required": ["typ", "alg"],
             "properties": {
                 "typ": {
                     "type": "string"
@@ -14,8 +14,7 @@
                     "type": "string"
                 },
                 "kid": {
-                    "type": "string",
-                    "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+#[0-9a-zA-Z-]+$"
+                    "type": "string"
                 },
                 "jwk": {
                     "type": "string",
