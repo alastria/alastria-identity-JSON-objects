@@ -5,7 +5,7 @@
     "properties": {
         "header": {
             "type": "object",
-            "required": ["typ", "alg", "kid"],
+            "required": ["typ", "alg"],
             "properties": {
                 "typ": {
                     "type": "string"
