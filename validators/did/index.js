@@ -25,7 +25,7 @@ function shouldHaveQuorOrFabrOrBesuAsNetwork(did) {
 
 function shouldProxyAddressBeValidString(did) {
     let proxyAddress = did.split(":")[4]
-    let regExToValidateHex = /^[0-9a-zA-Z]+$/;
+    let regExToValidateHex = /^[0-9a-fA-F]+$/;
     return regExToValidateHex.test(proxyAddress);
 }
 
