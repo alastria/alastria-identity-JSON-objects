@@ -24,8 +24,16 @@ function shouldHaveQuorOrFabrOrBesuAsNetwork(did) {
 }
 
 function shouldProxyAddressBeValidString(did) {
-    let proxyAddress = did.split(":")[4]
-    let regExToValidateHex = /^[0-9a-fA-F]+$/;
+    //A RegEx to validate an Ethereum address must check for a 0x followed by 40 hex random string characters (42 in total)
+    //Also accepting non 0x prefixes address will consist on having 40 hex random string characters.
+    let proxyAddress = did.split(":")[4];
+    let regExToValidateHex;
+    if(String(proxyAddress).length==42){
+        regExToValidateHex = /^0x[a-fA-F0-9]{40}$/;
+    }else{
+        regExToValidateHex = /^[0-9a-fA-F]+$/;
+    }
+    
     return regExToValidateHex.test(proxyAddress);
 }
 
