@@ -26,12 +26,32 @@
         },
         "payload": {
             "type": "object",
-            "required": ["iss", "gwu", "cbu", "ani", "iat", "exp"],
+            "required": ["iss", "gwu", "cbu", "iat", "exp"],
             "additionalProperties": false,
             "properties": {
+                "@context": {
+                    "type": "array",
+                    "items": [{
+                        "type": "string",
+                        "enum": ["https://alastria.github.io/identity/artifacts/v1"]
+                    }],
+                    "additionalItems": true,
+                    "uniqueItems": true,
+                    "minItems": 1
+                },
                 "iss": {
                     "type": "string",
                     "pattern": "^did:ala:(quor|fabr|besu):.+:[0-9a-zA-Z]+$"
+                },
+                "type": {
+                    "type": "array",
+                    "items": [{
+                        "type": "string",
+                        "enum": ["AlastriaToken"]
+                    }],
+                    "additionalItems": true,
+                    "uniqueItems": true,
+                    "minItems": 1
                 },
                 "gwu": {
                     "type": "string"
@@ -39,9 +59,8 @@
                 "cbu": {
                     "type": "string"
                 },
-                "ani": {
-                    "type": "string",
-                    "pattern": "^(redt|redb|redT|redB)$"
+                "mfau": {
+                    "type": "string"
                 },
                 "iat": {
                     "type": "integer",
