@@ -1,11 +1,17 @@
 {
     "title": "Presentation Request Schema",
     "type": "object",
-    "required": ["header", "payload"],
+    "required": [
+        "header",
+        "payload"
+    ],
     "properties": {
         "header": {
             "type": "object",
-            "required": ["typ", "alg"],
+            "required": [
+                "typ",
+                "alg"
+            ],
             "properties": {
                 "typ": {
                     "type": "string"
@@ -22,12 +28,17 @@
                     "pattern": "^0[xX][0-9a-fA-F]+$"
                 }
             },
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "payload": {
             "type": "object",
-            "required": ["iss", "iat", "cbu", "pr"],
-            "additionalProperties": false,
+            "required": [
+                "iss",
+                "iat",
+                "cbu",
+                "pr"
+            ],
+            "additionalProperties": true,
             "properties": {
                 "iss": {
                     "type": "string",
@@ -42,37 +53,72 @@
                 },
                 "pr": {
                     "type": "object",
-                    "required": ["procUrl", "type", "procHash", "@context", "data"],
-                    "additionalProperties": false,
+                    "required": [
+                        "procUrl",
+                        "type",
+                        "procHash",
+                        "@context",
+                        "data"
+                    ],
+                    "additionalProperties": true,
                     "properties": {
                         "procUrl": {
                             "type": "string"
                         },
                         "type": {
                             "type": "array",
-                            "items": [{
-                                "type": "string",
-                                "enum": ["VerifiablePresentationRequest", "AlastriaVerifiablePresentationRequest"]
-                            }, {
-                                "type": "string",
-                                "enum": ["VerifiablePresentationRequest", "AlastriaVerifiablePresentationRequest"]
-                            }],
+                            "items": [
+                                {
+                                    "type": "string",
+                                    "enum": [
+                                        "VerifiablePresentationRequest",
+                                        "AlastriaVerifiablePresentationRequest"
+                                    ]
+                                },
+                                {
+                                    "type": "string",
+                                    "enum": [
+                                        "VerifiablePresentationRequest",
+                                        "AlastriaVerifiablePresentationRequest"
+                                    ]
+                                }
+                            ],
                             "additionalItems": true,
                             "uniqueItems": true,
                             "minItems": 2
                         },
+                        "p_exp": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "p_exp_delta": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
                         "procHash": {
+                            "type": "string"
+                        },
+                        "procDesc": {
                             "type": "string"
                         },
                         "@context": {
                             "type": "array",
-                            "items": [{
-                                "type": "string",
-                                "enum": ["https://www.w3.org/2018/credentials/v1", "https://alastria.github.io/identity/credentials/v1"]
-                            }, {
-                                "type": "string",
-                                "enum": ["https://www.w3.org/2018/credentials/v1", "https://alastria.github.io/identity/credentials/v1"]
-                            }],
+                            "items": [
+                                {
+                                    "type": "string",
+                                    "enum": [
+                                        "https://www.w3.org/2018/credentials/v1",
+                                        "https://alastria.github.io/identity/credentials/v1"
+                                    ]
+                                },
+                                {
+                                    "type": "string",
+                                    "enum": [
+                                        "https://www.w3.org/2018/credentials/v1",
+                                        "https://alastria.github.io/identity/credentials/v1"
+                                    ]
+                                }
+                            ],
                             "additionalItems": true,
                             "uniqueItems": true,
                             "minItems": 2
@@ -81,11 +127,34 @@
                             "type": "array",
                             "items": {
                                 "type": "object",
-                                "required": ["@context", "required", "field_name"],
-                                "additionalProperties": false,
+                                "required": [
+                                    "@context",
+                                    "required",
+                                    "field_name"
+                                ],
+                                "additionalProperties": true,
                                 "properties": {
                                     "@context": {
-                                        "type": "string"
+                                        "type": "array",
+                                        "items": [
+                                            {
+                                                "type": "string",
+                                                "enum": [
+                                                    "JWT",
+                                                    "https://alastria.github.io/identity/credentials/v1"
+                                                ]
+                                            },
+                                            {
+                                                "type": "string",
+                                                "enum": [
+                                                    "JWT",
+                                                    "https://alastria.github.io/identity/credentials/v1"
+                                                ]
+                                            }
+                                        ],
+                                        "additionalItems": true,
+                                        "uniqueItems": true,
+                                        "minItems": 2
                                     },
                                     "required": {
                                         "type": "boolean"

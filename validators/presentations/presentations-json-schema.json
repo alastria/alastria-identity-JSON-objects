@@ -52,6 +52,9 @@
                     "type": "integer",
                     "minimum": 0
                 },
+                "jtipr": {
+                    "type": "string"
+                },
                 "vp": {
                     "type": "object",
                     "additionalProperties": true,
